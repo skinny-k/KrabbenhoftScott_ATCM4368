@@ -352,10 +352,13 @@
 "Assets/Scripts/CollectibleBase.cs"
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/HealthIncrease.cs"
+"Assets/Scripts/Inventory.cs"
 "Assets/Scripts/Killer.cs"
 "Assets/Scripts/Player.cs"
+"Assets/Scripts/Slower.cs"
 "Assets/Scripts/SpeedIncrease.cs"
 "Assets/Scripts/TankController.cs"
+"Assets/Scripts/Treasure.cs"
 -langversion:9.0
 
 /deterministic

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class SpeedIncrease : CollectibleBase
 {
-    [SerializeField] float _speedAdded = 5;
+    [SerializeField] float _speedModifier = 2f;
+    [SerializeField] float _duration = 5f;
 
     protected override void Collect(Player player)
     {
         TankController controller = player.GetComponent<TankController>();
         if (controller != null)
         {
-            controller.MoveSpeed += _speedAdded;
-            Debug.Log("Player's speed: " + controller.MoveSpeed);
+            //controller.MoveSpeed += _speedAdded;
+            controller.MoveModifier *= _speedModifier;
+            Debug.Log("Player's speed modifier: " + (controller.MoveModifier));
+            controller.StartCoroutine(controller.ResetSpeed(_speedModifier, _duration));
         }
     }
 

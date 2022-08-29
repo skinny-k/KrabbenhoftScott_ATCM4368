@@ -34,6 +34,7 @@ public abstract class CollectibleBase : MonoBehaviour
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
+            TankController controller = player.GetComponent<TankController>();
             Collect(player);
             Feedback();
             gameObject.SetActive(false);
