@@ -18,7 +18,7 @@ public class Treasure : CollectibleBase
 
     protected override void Movement(Rigidbody rb)
     {
-        Quaternion turnOffset = Quaternion.Euler(MovementSpeed, MovementSpeed, MovementSpeed);
+        Quaternion turnOffset = Quaternion.Euler(0, MovementSpeed, 0);
         rb.MoveRotation(_rb.rotation * turnOffset);
     }
 }

@@ -37,7 +37,7 @@ public abstract class CollectibleBase : MonoBehaviour
             TankController controller = player.GetComponent<TankController>();
             Collect(player);
             Feedback();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
