@@ -35,7 +35,10 @@ public class Enemy : MonoBehaviour
     {
         if (_impactParticles != null)
         {
-            _impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.identity);
+            //_impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.identity);
+            // This results in a bunch of floating unused particles and causes issues with the Destroy
+            // stop action. The line below works with Destroy stop action to clean up after itself.
+            Instantiate(_impactParticles, transform.position, Quaternion.identity);
         }
         if (_impactSound != null)
         {

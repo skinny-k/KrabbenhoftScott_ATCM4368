@@ -45,7 +45,10 @@ public abstract class CollectibleBase : MonoBehaviour
     {
         if (_collectParticles != null)
         {
-            _collectParticles = Instantiate(_collectParticles, transform.position, Quaternion.identity);
+            // _collectParticles = Instantiate(_collectParticles, transform.position, Quaternion.identity);
+            // This results in a bunch of floating unused particles and causes issues with the Destroy
+            // stop action. The line below works with Destroy stop action to clean up after itself.
+            Instantiate(_collectParticles, transform.position, Quaternion.identity);
         }
         if (_collectSound != null)
         {

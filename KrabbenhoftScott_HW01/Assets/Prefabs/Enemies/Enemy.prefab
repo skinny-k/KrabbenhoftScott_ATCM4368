@@ -128,5 +128,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 1
-  _impactParticles: {fileID: 0}
-  _impactSound: {fileID: 0}
+  _impactParticles: {fileID: 4869539013893006338, guid: c46737fab65b24e81a037330524fcbd4, type: 3}
+  _impactSound: {fileID: 8300000, guid: 65d74f9f0ba0043168bb0764d68cd24c, type: 3}

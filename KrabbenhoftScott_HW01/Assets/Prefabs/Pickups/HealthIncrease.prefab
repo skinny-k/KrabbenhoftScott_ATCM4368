@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a0d2832853048548f350bd7df77594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collectParticles: {fileID: 0}
-  _collectSound: {fileID: 0}
+  _collectParticles: {fileID: 4869539013893006338, guid: 5c6c611bc870e4a99b611edd76c0eadc, type: 3}
+  _collectSound: {fileID: 8300000, guid: 9da10bc0aa70e41669f6e9fcf319343e, type: 3}
   _movementSpeed: 1
   _healthAdded: 1

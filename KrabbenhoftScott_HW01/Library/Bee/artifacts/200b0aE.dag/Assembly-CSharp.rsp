@@ -361,6 +361,7 @@
 "Assets/Scripts/SpeedIncrease.cs"
 "Assets/Scripts/TankController.cs"
 "Assets/Scripts/Treasure.cs"
+"Assets/Scripts/UIHelper.cs"
 -langversion:9.0
 
 /deterministic

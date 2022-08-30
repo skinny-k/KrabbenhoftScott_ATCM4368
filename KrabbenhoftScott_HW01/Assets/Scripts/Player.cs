@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     TankController _tankController;
     Inventory _inventory;
 
+    UIHelper ui;
+
     Material m_body;
     Material m_tread_l;
     Material m_tread_r;
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
     {
         _tankController = GetComponent<TankController>();
         _inventory = GetComponent<Inventory>();
+
+        ui = GameObject.Find("Canvas").GetComponent<UIHelper>();
 
         m_body    = transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         m_tread_l = transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material;
@@ -42,6 +46,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _currentHealth = _maxHealth;
+        ui.UpdateHealth(_currentHealth);
     }
 
     void Update()
@@ -66,7 +71,7 @@ public class Player : MonoBehaviour
     public void IncreaseHealth(int amount)
     {
         _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
-        Debug.Log("Player's health: " + _currentHealth);
+        ui.UpdateHealth(_currentHealth);
     }
 
     public void DecreaseHealth(int amount)
@@ -74,18 +79,20 @@ public class Player : MonoBehaviour
         if (!_invincible)
         {
             _currentHealth = Mathf.Clamp(_currentHealth - amount, 0, _maxHealth);
+            ui.UpdateHealth(_currentHealth);
             if (_currentHealth <= 0)
             {
                 Kill();
             }
         }
-        Debug.Log("Player's health: " + _currentHealth);
     }
 
     public void Kill()
     {
         if (!_invincible)
         {
+            _currentHealth = 0;
+            ui.UpdateHealth(_currentHealth);
             gameObject.SetActive(false);
         }
     }

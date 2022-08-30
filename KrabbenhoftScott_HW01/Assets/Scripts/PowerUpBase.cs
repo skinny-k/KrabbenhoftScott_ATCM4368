@@ -42,7 +42,7 @@ public abstract class PowerUpBase : MonoBehaviour
             TankController controller = player.GetComponent<TankController>();
             PowerUp(player);
             GetComponent<Collider>().enabled = false;
-            GetComponent<MeshRenderer>().enabled = false;
+            transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             Feedback();
             StartCoroutine(Cooldown(player));
         }
@@ -52,7 +52,10 @@ public abstract class PowerUpBase : MonoBehaviour
     {
         if (_collectParticles != null)
         {
-            _collectParticles = Instantiate(_collectParticles, transform.position, Quaternion.identity);
+            // _collectParticles = Instantiate(_collectParticles, transform.position, Quaternion.identity);
+            // This results in a bunch of floating unused particles and causes issues with the Destroy
+            // stop action. The line below works with Destroy stop action to clean up after itself.
+            Instantiate(_collectParticles, transform.position, Quaternion.identity);
         }
         if (_collectSound != null)
         {

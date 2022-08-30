@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private int _treasure = 0;
+    UIHelper ui;
+    
+    int _treasure = 0;
     public int Treasure
     {
         get => _treasure;
-        set => _treasure = value;
+        set { _treasure = value; ui.UpdateTreasure(_treasure); }
+    }
+
+    void Awake()
+    {
+        ui = GameObject.Find("Canvas").GetComponent<UIHelper>();
+    }
+
+    void Start()
+    {
+        ui.UpdateTreasure(_treasure);
     }
 }

@@ -113,7 +113,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!114 &5808377809495579835
 MonoBehaviour:
@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c189826578b4c35b71cbc561d762e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collectParticles: {fileID: 0}
-  _collectSound: {fileID: 0}
+  _collectParticles: {fileID: 4869539013893006338, guid: 0b7b34920fbda454a90cbc347dda7fbe, type: 3}
+  _collectSound: {fileID: 8300000, guid: 3f4245aca951b491e8fb34ea531378bf, type: 3}
   _movementSpeed: 1
-  _speedAdded: 0.25
+  _speedModifier: 2
+  _duration: 5
