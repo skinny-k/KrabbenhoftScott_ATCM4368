@@ -15,6 +15,14 @@ public class UIHelper : MonoBehaviour
         _treasure = transform.GetChild(1).GetComponent<TMP_Text>();
     }
 
+    void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
+
     public void UpdateHealth(int health)
     {
         _health.text   = "Health:      " + health;
