@@ -7,7 +7,7 @@ public class Slower : Enemy
     [SerializeField] float _speedModifier = 0.3f;
     [SerializeField] float _duration = 1.5f;
     
-    protected override void PlayerImpact(Player player)
+    protected override void PlayerImpact(TankPlayer player)
     {
         TankController controller = player.GetComponent<TankController>();
         if (controller != null)

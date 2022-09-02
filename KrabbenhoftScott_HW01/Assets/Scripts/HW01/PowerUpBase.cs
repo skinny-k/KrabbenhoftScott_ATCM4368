@@ -6,8 +6,8 @@ public abstract class PowerUpBase : MonoBehaviour
 {
     [SerializeField] float _duration = 5f;
     
-    protected abstract void PowerUp(Player player);
-    protected abstract void PowerDown(Player player);
+    protected abstract void PowerUp(TankPlayer player);
+    protected abstract void PowerDown(TankPlayer player);
 
     [SerializeField] ParticleSystem _collectParticles;
     [SerializeField] AudioClip _collectSound;
@@ -36,7 +36,7 @@ public abstract class PowerUpBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
+        TankPlayer player = other.gameObject.GetComponent<TankPlayer>();
         if (player != null)
         {
             TankController controller = player.GetComponent<TankController>();
@@ -63,7 +63,7 @@ public abstract class PowerUpBase : MonoBehaviour
         }
     }
 
-    private IEnumerator Cooldown(Player player)
+    private IEnumerator Cooldown(TankPlayer player)
     {
         yield return new WaitForSeconds(_duration);
         PowerDown(player);

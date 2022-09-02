@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class CollectibleBase : MonoBehaviour
 {
-    protected abstract void Collect(Player player);
+    protected abstract void Collect(TankPlayer player);
 
     [SerializeField] ParticleSystem _collectParticles;
     [SerializeField] AudioClip _collectSound;
@@ -31,7 +31,7 @@ public abstract class CollectibleBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
+        TankPlayer player = other.gameObject.GetComponent<TankPlayer>();
         if (player != null)
         {
             TankController controller = player.GetComponent<TankController>();

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class InvincibilityPowerUp : PowerUpBase
 {
-    protected override void PowerUp(Player player)
+    protected override void PowerUp(TankPlayer player)
     {
         player.Invincible = true;
         Debug.Log("Player is invincible!");
     }
 
-    protected override void PowerDown(Player player)
+    protected override void PowerDown(TankPlayer player)
     {
         player.Invincible = false;
         Debug.Log("Invicibility duration ended.");

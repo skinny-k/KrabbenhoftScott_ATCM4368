@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
+        TankPlayer player = other.gameObject.GetComponent<TankPlayer>();
         if (player != null)
         {
             PlayerImpact(player);
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void PlayerImpact(Player player)
+    protected virtual void PlayerImpact(TankPlayer player)
     {
         player.DecreaseHealth(_damageAmount);
     }

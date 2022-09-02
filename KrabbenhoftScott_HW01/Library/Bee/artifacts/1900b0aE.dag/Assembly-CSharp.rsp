@@ -360,14 +360,19 @@
 "Assets/Scripts/HW01/Inventory.cs"
 "Assets/Scripts/HW01/InvincibilityPowerUp.cs"
 "Assets/Scripts/HW01/Killer.cs"
-"Assets/Scripts/HW01/Player.cs"
 "Assets/Scripts/HW01/PowerUpBase.cs"
 "Assets/Scripts/HW01/Slower.cs"
 "Assets/Scripts/HW01/SpeedIncrease.cs"
 "Assets/Scripts/HW01/TankController.cs"
+"Assets/Scripts/HW01/TankPlayer.cs"
 "Assets/Scripts/HW01/Treasure.cs"
 "Assets/Scripts/HW01/UIHelper.cs"
-"Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/P01/Bullet.cs"
+"Assets/Scripts/P01/GameController.cs"
+"Assets/Scripts/P01/Player.cs"
+"Assets/Scripts/P01/PlayerGun.cs"
+"Assets/Scripts/P01/PlayerMovement.cs"
+"Assets/Scripts/P01/Projectile.cs"
 -langversion:9.0
 
 /deterministic
