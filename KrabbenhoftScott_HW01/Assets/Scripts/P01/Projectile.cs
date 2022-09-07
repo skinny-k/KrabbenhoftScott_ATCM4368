@@ -7,7 +7,8 @@ public abstract class Projectile : MonoBehaviour
     protected abstract void Impact(Collision otherCollision);
 
     [Header("Base Settings")]
-    [SerializeField] protected float TravelSpeed = .25f;
+    [SerializeField] protected float _travelSpeed = .25f;
+    [SerializeField] protected int _damage = 10;
     [SerializeField] protected ParticleSystem _impactParticles;
     [SerializeField] protected AudioClip _impactSFX;
     protected Rigidbody RB;
@@ -19,7 +20,7 @@ public abstract class Projectile : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        Feedback();
+        Feedback(collision);
         Impact(collision);
     }
 
@@ -30,10 +31,10 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void Move()
     {
-        Vector3 moveOffset = transform.forward * TravelSpeed;
+        Vector3 moveOffset = transform.forward * _travelSpeed;
         RB.MovePosition(RB.position + moveOffset);
     }
-    protected virtual void Feedback()
+    protected virtual void Feedback(Collision collision)
     {
         if (_impactParticles != null)
         {
