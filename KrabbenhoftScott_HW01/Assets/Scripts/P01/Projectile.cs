@@ -8,8 +8,6 @@ public abstract class Projectile : MonoBehaviour
 
     [Header("Base Settings")]
     [SerializeField] protected float TravelSpeed = .25f;
-    [SerializeField] protected ParticleSystem _fireParticles;
-    [SerializeField] protected AudioClip _fireSFX;
     [SerializeField] protected ParticleSystem _impactParticles;
     [SerializeField] protected AudioClip _impactSFX;
     protected Rigidbody RB;
@@ -37,7 +35,14 @@ public abstract class Projectile : MonoBehaviour
     }
     protected virtual void Feedback()
     {
-        //
+        if (_impactParticles != null)
+        {
+            Instantiate(_impactParticles, transform.position, transform.rotation);
+        }
+        if (_impactSFX != null)
+        {
+            AudioHelper.PlayClip3D(_impactSFX, 1.0f, transform.position);
+        }
     }
 }
 

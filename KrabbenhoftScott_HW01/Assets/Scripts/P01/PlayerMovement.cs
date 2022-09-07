@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem _jumpParticles;
     [SerializeField] float _moveSpeed = 2f;
     [SerializeField] float _jumpPower = 10f;
+
     Rigidbody _rb;
     float _moveModifier = 1f;
 
@@ -25,12 +26,9 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         // calculate the move amount
-        float moveX = Input.GetAxis("Horizontal") * _moveSpeed * _moveModifier * Time.deltaTime;
-        float moveZ = Input.GetAxis("Vertical")   * _moveSpeed * _moveModifier * Time.deltaTime;
-        // create a vector from amount and direction
-        Vector3 moveOffset = new Vector3(moveX, 0, moveZ);
+        Vector3 moveOffset = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         // apply vector to the rigidbody
-        _rb.MovePosition(_rb.position + moveOffset);
+        _rb.MovePosition(_rb.position + moveOffset * _moveSpeed * _moveModifier * Time.deltaTime);
         // technically adjusting vector is more accurate! (but more complex)
         if ((moveOffset != Vector3.zero) && Physics.OverlapSphere(transform.position, 0.01f, LayerMask.GetMask("Game Plane")).Length > 0)
         {

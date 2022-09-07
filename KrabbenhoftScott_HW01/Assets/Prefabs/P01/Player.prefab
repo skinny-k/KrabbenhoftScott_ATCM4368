@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3636747126755278764}
   - component: {fileID: 2072089159313332168}
   - component: {fileID: 5875400970813241310}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5889,7 +5889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6646373854987256471}
   - component: {fileID: 8532394737892425211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5928,6 +5928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bullet: {fileID: 8810881072085081540, guid: 5a97a6918d5ff44c7ac0342c563f5b34, type: 3}
+  _fireParticles: {fileID: 7663688992488804687, guid: 49ad3e9d778a5429b9453016fa443aa5, type: 3}
+  _fireSFX: {fileID: 8300000, guid: a75b3e1ad7ec5491bb55f529ad762168, type: 3}
+  fireRate: 0.25
 --- !u!1 &3655359616272412005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,7 +5942,7 @@ GameObject:
   - component: {fileID: 149884310014608588}
   - component: {fileID: 3802834620349667865}
   - component: {fileID: 8530516934935633473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6022,7 +6025,7 @@ GameObject:
   - component: {fileID: 8838750267586757795}
   - component: {fileID: 5282299809179494745}
   - component: {fileID: 4027667622206522958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6105,7 +6108,7 @@ GameObject:
   - component: {fileID: 2536965607010526766}
   - component: {fileID: 7264332292733442015}
   - component: {fileID: 8016894163605013509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Iron Sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6189,7 +6192,8 @@ GameObject:
   - component: {fileID: 7154262711503345442}
   - component: {fileID: 4410242408549707535}
   - component: {fileID: 5784133833903866664}
-  m_Layer: 0
+  - component: {fileID: 3124905947755927905}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6262,6 +6266,18 @@ CapsuleCollider:
   m_Height: 2.7
   m_Direction: 1
   m_Center: {x: 0, y: 1.35, z: 0}
+--- !u!114 &3124905947755927905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410242408549707761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3dde25bd51c84c5aa22c482ca54a49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4745356231799827492
 GameObject:
   m_ObjectHideFlags: 0
@@ -6273,7 +6289,7 @@ GameObject:
   - component: {fileID: 8847221226346953442}
   - component: {fileID: 3532418603328200920}
   - component: {fileID: 6639097513314969694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6356,7 +6372,7 @@ GameObject:
   - component: {fileID: 331028982835270606}
   - component: {fileID: 96608635357162448}
   - component: {fileID: 1033858861753206431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6439,7 +6455,7 @@ GameObject:
   - component: {fileID: 8176011687208437546}
   - component: {fileID: 211143617478489955}
   - component: {fileID: 2287434983943065252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6522,7 +6538,7 @@ GameObject:
   - component: {fileID: 958640217069778712}
   - component: {fileID: 4755854555462989179}
   - component: {fileID: 3173771676306483385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pommel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
