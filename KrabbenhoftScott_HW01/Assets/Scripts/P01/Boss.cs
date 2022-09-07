@@ -10,6 +10,7 @@ public class Boss : Enemy
     [SerializeField] float _indicatorTime = 1f;
     [SerializeField] float _flashTime = 0.25f;
     [SerializeField] float _movePeriod = 4f;
+    [SerializeField] float _jumpPower = 20f;
     
     [Header("Sprite Materials")]
     [SerializeField] Material m_pawn;
@@ -87,6 +88,8 @@ public class Boss : Enemy
 
     protected override void Move()
     {
+        _rb.AddForce(Physics.gravity * 0.5f);
+        
         if (_needsTarget)
         {
             FindTarget();
@@ -315,6 +318,8 @@ public class Boss : Enemy
         StartCoroutine(SetSprite(m_knight));
         yield return StartCoroutine(FlashLight());
 
+        _rb.AddForce(new Vector3(0, _jumpPower, 0));
+        
         _inMove = true;
         _target = target;
     }
@@ -348,5 +353,14 @@ public class Boss : Enemy
 
         _rb.AddForceAtPosition(dir2 * 150, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
         moveType = null;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Game Plane"))
+        {
+            _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
+            _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
+        }
     }
 }
