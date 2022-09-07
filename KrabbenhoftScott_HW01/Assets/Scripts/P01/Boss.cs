@@ -11,6 +11,7 @@ public class Boss : Enemy
     [SerializeField] float _flashTime = 0.25f;
     [SerializeField] float _movePeriod = 4f;
     [SerializeField] float _jumpPower = 20f;
+    [SerializeField] float _torquePower = 300f;
     
     [Header("Sprite Materials")]
     [SerializeField] Material m_pawn;
@@ -21,7 +22,7 @@ public class Boss : Enemy
     [SerializeField] Material m_king;
 
     protected Rigidbody _rb;
-    protected GameObject _indicator;
+    protected BossMoveIndicator _indicator;
     protected Light _light;
 
     public Vector3 _target;
@@ -33,7 +34,7 @@ public class Boss : Enemy
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _indicator = transform.GetChild(0).gameObject;
+        _indicator = transform.GetChild(0).GetComponent<BossMoveIndicator>();
         _light = transform.GetChild(1).GetComponent<Light>();
         _target = transform.position;
 
@@ -42,7 +43,7 @@ public class Boss : Enemy
 
     void Start()
     {
-        _indicator.SetActive(false);
+        _indicator.gameObject.SetActive(false);
         _light.gameObject.SetActive(false);
     }
 
@@ -60,35 +61,95 @@ public class Boss : Enemy
 
     void ChooseMove()
     {
-        if (Input.GetKey(KeyCode.P))
+        // check cardinals
+        Vector3 row = new Vector3(transform.localScale.x * 8, transform.localScale.y * 0.5f, transform.localScale.z * 0.25f);
+        Vector3 column = new Vector3(transform.localScale.x * 0.25f, transform.localScale.y * 0.5f, transform.localScale.z * 8);
+        if (Physics.OverlapBox(transform.position, row, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 || Physics.OverlapBox(transform.position, column, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0)
         {
-            StartCoroutine(SetSprite(m_pawn));
+            if (Vector3.Distance(transform.position, player.transform.position) <= 3)
+            {
+                if(Random.Range(0, 2) == 0)
+                {
+                    moveType = "KING";
+                }
+                else
+                {
+                    moveType = "ROOK";
+                }
+            }
+            else
+            {
+                if(Random.Range(0, 2) == 0)
+                {
+                    moveType = "QUEEN";
+                }
+                else
+                {
+                    moveType = "ROOK";
+                }
+            }
         }
-        else if (Input.GetKey(KeyCode.R))
+        // check diagonals
+        else if (Physics.OverlapBox(transform.position, row, Quaternion.identity * Quaternion.Euler(0, 45, 0), LayerMask.GetMask("Player")).Length > 0 || Physics.OverlapBox(transform.position, column, Quaternion.identity * Quaternion.Euler(0, 45, 0), LayerMask.GetMask("Player")).Length > 0)
         {
-            moveType = "ROOK";
+            if (Vector3.Distance(transform.position, player.transform.position) <= 3)
+            {
+                if(Random.Range(0, 2) == 0)
+                {
+                    moveType = "KING";
+                }
+                else
+                {
+                    moveType = "BISHOP";
+                }
+            }
+            else
+            {
+                if(Random.Range(0, 2) == 0)
+                {
+                    moveType = "QUEEN";
+                }
+                else
+                {
+                    moveType = "BISHOP";
+                }
+            }
         }
-        else if (Input.GetKey(KeyCode.H))
+        // check knight spaces
+        else if (Physics.OverlapBox(transform.position + new Vector3(4, 0, 2), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(2, 0, 4), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(4, 0, -2), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(2, 0, -4), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(-2, 0, 4), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(-4, 0, 2), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(-2, 0, -4), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0 ||
+                 Physics.OverlapBox(transform.position + new Vector3(-4, 0, -2), transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0)
         {
             moveType = "KNIGHT";
         }
-        else if (Input.GetKey(KeyCode.B))
+        else
         {
-            moveType = "BISHOP";
-        }
-        else if (Input.GetKey(KeyCode.Q))
-        {
-            StartCoroutine(SetSprite(m_queen));
-        }
-        else if (Input.GetKey(KeyCode.K))
-        {
-            moveType = "KING";
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    moveType = "BISHOP";
+                    break;
+                case 1:
+                    moveType = "ROOK";
+                    break;
+                case 2:
+                    moveType = "PAWN";
+                    break;
+                case 3:
+                    moveType = "PAWN";
+                    break;
+            }
         }
     }
 
     protected override void Move()
     {
-        _rb.AddForce(Physics.gravity * 0.5f);
+        //_rb.AddForce(Physics.gravity * 0.5f);
         
         if (_needsTarget)
         {
@@ -104,12 +165,19 @@ public class Boss : Enemy
                 moveType = null;
             }
         }
+        if (moveType == "KNIGHT")
+        {
+            _rb.AddForce(Physics.gravity * -0.75f);
+        }
     }
 
     protected void FindTarget()
     {
         switch (moveType)
         {
+            case "PAWN":
+                StartCoroutine(SpawnPawn());
+                break;
             case "ROOK":
                 bool XisNegligible = Mathf.Abs(player.transform.position.x - transform.position.x) <= 1f;
                 bool ZisNegligible = Mathf.Abs(player.transform.position.z - transform.position.z) <= 1f;
@@ -226,6 +294,9 @@ public class Boss : Enemy
                     StartCoroutine(BishopMove(target));
                 }
                 break;
+            case "QUEEN":
+                StartCoroutine(QueenFire());
+                break;
             case "KING":
                 Vector3 _dir1 = Vector3.zero;
                 Vector3 _dir2 = Vector3.zero;
@@ -286,14 +357,6 @@ public class Boss : Enemy
         _needsTarget = false;
     }
 
-    IEnumerator SetSprite(Material sprite)
-    {
-        _indicator.SetActive(true);
-        _indicator.GetComponent<MeshRenderer>().material = sprite;
-        yield return new WaitForSeconds(_indicatorTime);
-        _indicator.SetActive(false);
-    }
-
     IEnumerator FlashLight()
     {
         for (int i = 0; i < 5; i++)
@@ -304,9 +367,17 @@ public class Boss : Enemy
         _light.gameObject.SetActive(false);
     }
 
+    IEnumerator SpawnPawn()
+    {
+        StartCoroutine(_indicator.SetSprite(m_pawn, _indicatorTime));
+        yield return StartCoroutine(FlashLight());
+
+        moveType = null;
+    }
+    
     IEnumerator RookMove(Vector3 target)
     {
-        StartCoroutine(SetSprite(m_rook));
+        StartCoroutine(_indicator.SetSprite(m_rook, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
         _inMove = true;
@@ -315,7 +386,7 @@ public class Boss : Enemy
 
     IEnumerator KnightMove(Vector3 target)
     {
-        StartCoroutine(SetSprite(m_knight));
+        StartCoroutine(_indicator.SetSprite(m_knight, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
         _rb.AddForce(new Vector3(0, _jumpPower, 0));
@@ -326,32 +397,40 @@ public class Boss : Enemy
 
     IEnumerator BishopMove(Vector3 target)
     {
-        StartCoroutine(SetSprite(m_bishop));
+        StartCoroutine(_indicator.SetSprite(m_bishop, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
         _inMove = true;
         _target = target;
     }
+
+    IEnumerator QueenFire()
+    {
+        StartCoroutine(_indicator.SetSprite(m_queen, _indicatorTime));
+        yield return StartCoroutine(FlashLight());
+
+        moveType = null;
+    }
     
     IEnumerator KingMove(Vector3 dir)
     {
-        StartCoroutine(SetSprite(m_king));
+        StartCoroutine(_indicator.SetSprite(m_king, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
-        _rb.AddForceAtPosition(dir * 150, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
+        _rb.AddForceAtPosition(dir * _torquePower, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
         moveType = null;
     }
 
     IEnumerator KingMove(Vector3 dir1, Vector3 dir2)
     {
-        StartCoroutine(SetSprite(m_king));
+        StartCoroutine(_indicator.SetSprite(m_king, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
-        _rb.AddForceAtPosition(dir1 * 150, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
+        _rb.AddForceAtPosition(dir1 * _torquePower, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
 
         yield return new WaitForSeconds(1.8f);
 
-        _rb.AddForceAtPosition(dir2 * 150, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
+        _rb.AddForceAtPosition(dir2 * _torquePower, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
         moveType = null;
     }
 
