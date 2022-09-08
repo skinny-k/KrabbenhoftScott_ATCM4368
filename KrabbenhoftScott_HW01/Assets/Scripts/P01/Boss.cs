@@ -428,7 +428,7 @@ public class Boss : Enemy
 
         _rb.AddForceAtPosition(dir1 * _torquePower, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
 
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1.5f);
 
         _rb.AddForceAtPosition(dir2 * _torquePower, new Vector3(transform.position.x, transform.position.y + 0.98f, transform.position.z));
         moveType = null;
