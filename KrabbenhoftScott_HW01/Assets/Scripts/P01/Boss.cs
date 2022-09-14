@@ -7,6 +7,8 @@ public class Boss : Enemy
 {
     [Header("Boss Settings")]
     [SerializeField] Player player;
+    [SerializeField] Pawn pawnPrefab;
+    [SerializeField] ParticleSystem _jumpParticles;
     [SerializeField] float _indicatorTime = 1f;
     [SerializeField] float _flashTime = 0.25f;
     [SerializeField] float _movePeriod = 4f;
@@ -21,11 +23,13 @@ public class Boss : Enemy
     [SerializeField] Material m_queen;
     [SerializeField] Material m_king;
 
+    public Light _light;
     protected Rigidbody _rb;
     protected BossMoveIndicator _indicator;
-    protected Light _light;
 
-    public Vector3 _target;
+    BossHealth _health;
+    Eye _eye;
+    Vector3 _target;
     string moveType;
     float _moveTimer = 0f;
     bool _needsTarget = false;
@@ -36,6 +40,9 @@ public class Boss : Enemy
         _rb = GetComponent<Rigidbody>();
         _indicator = transform.GetChild(0).GetComponent<BossMoveIndicator>();
         _light = transform.GetChild(1).GetComponent<Light>();
+        _health = GetComponent<BossHealth>();
+        _eye = transform.GetChild(2).GetComponent<Eye>();
+        _eye.SetColorNormal();
         _target = transform.position;
 
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -49,13 +56,16 @@ public class Boss : Enemy
 
     void Update()
     {
-        _moveTimer += Time.deltaTime;
-        if (_moveTimer >= _movePeriod)
+        if (!_health.isDying)
         {
-            ChooseMove();
-            _moveTimer = 0f;
-            _inMove = false;
-            _needsTarget = true;
+            _moveTimer += Time.deltaTime;
+            if (_moveTimer >= _movePeriod)
+            {
+                ChooseMove();
+                _moveTimer = 0f;
+                _inMove = false;
+                _needsTarget = true;
+            }
         }
     }
 
@@ -149,25 +159,26 @@ public class Boss : Enemy
 
     protected override void Move()
     {
-        //_rb.AddForce(Physics.gravity * 0.5f);
-        
-        if (_needsTarget)
+        if (!_health.isDying)
         {
-            FindTarget();
-        }
-        if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
-        {
-            Vector3 moveOffset = _target - transform.position;
-            _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
-            if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
+            if (_needsTarget)
             {
-                _rb.MovePosition(_target);
-                moveType = null;
+                FindTarget();
             }
-        }
-        if (moveType == "KNIGHT")
-        {
-            _rb.AddForce(Physics.gravity * -0.75f);
+            if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
+            {
+                Vector3 moveOffset = _target - transform.position;
+                _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
+                if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
+                {
+                    _rb.MovePosition(_target);
+                    moveType = null;
+                }
+            }
+            if (moveType == "KNIGHT")
+            {
+                _rb.AddForce(Physics.gravity * -0.75f);
+            }
         }
     }
 
@@ -176,7 +187,13 @@ public class Boss : Enemy
         switch (moveType)
         {
             case "PAWN":
-                StartCoroutine(SpawnPawn());
+                int column = (Random.Range(-4, 4) * 2) + 1;
+                int row;
+                do
+                {
+                    row = (Random.Range(-4, 4) * 2) + 1;
+                } while (Mathf.Abs(row - transform.position.z) < 1 || (Mathf.Abs(row - player.transform.position.z) < 1));
+                StartCoroutine(SpawnPawn(new Vector3(column, 1, row)));
                 break;
             case "ROOK":
                 bool XisNegligible = Mathf.Abs(player.transform.position.x - transform.position.x) <= 1f;
@@ -362,15 +379,30 @@ public class Boss : Enemy
         for (int i = 0; i < 5; i++)
         {
             _light.gameObject.SetActive(!_light.gameObject.activeSelf);
+            if (_light.gameObject.activeSelf)
+            {
+                _eye.SetColorAlert();
+            }
+            else
+            {
+                _eye.SetColorNormal();
+            }
             yield return new WaitForSeconds(_flashTime);
         }
         _light.gameObject.SetActive(false);
+        _eye.SetColorNormal();
     }
 
-    IEnumerator SpawnPawn()
+    IEnumerator SpawnPawn(Vector3 position)
     {
         StartCoroutine(_indicator.SetSprite(m_pawn, _indicatorTime));
         yield return StartCoroutine(FlashLight());
+
+        _rb.AddForce(new Vector3(0, _jumpPower * 0.35f, 0));
+
+        // find valid space
+        Pawn pawn = Instantiate(pawnPrefab, position, Quaternion.identity);
+        pawn.player = player;
 
         moveType = null;
     }
@@ -436,10 +468,11 @@ public class Boss : Enemy
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Game Plane"))
+        if (collision.gameObject.name == "Game Plane")
         {
             _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
             _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
+            Instantiate(_jumpParticles, transform.position, transform.rotation);
         }
     }
 }

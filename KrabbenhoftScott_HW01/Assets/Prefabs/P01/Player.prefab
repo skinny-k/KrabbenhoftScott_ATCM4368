@@ -5927,7 +5927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164a82a44fda4f7dbeef1cd2cfbcdc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 8810881072085081540, guid: 5a97a6918d5ff44c7ac0342c563f5b34, type: 3}
+  _projectile: {fileID: 8810881072085081540, guid: 5a97a6918d5ff44c7ac0342c563f5b34, type: 3}
   _fireParticles: {fileID: 7663688992488804687, guid: 49ad3e9d778a5429b9453016fa443aa5, type: 3}
   _fireSFX: {fileID: 8300000, guid: a75b3e1ad7ec5491bb55f529ad762168, type: 3}
   fireRate: 0.25
@@ -6193,6 +6193,7 @@ GameObject:
   - component: {fileID: 4410242408549707535}
   - component: {fileID: 5784133833903866664}
   - component: {fileID: 3124905947755927905}
+  - component: {fileID: 2282452118270463209}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6278,6 +6279,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dde25bd51c84c5aa22c482ca54a49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2282452118270463209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410242408549707761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c048856282b47f78e410365aa956a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 30
+  _defenseModifier: 0
+  _healModifier: 1
+  _healParticles: {fileID: 0}
+  _healSFX: {fileID: 0}
+  _damageParticles: {fileID: 0}
+  _damageSFX: {fileID: 0}
+  _dieParticles: {fileID: 0}
+  _dieSFX: {fileID: 0}
 --- !u!1 &4745356231799827492
 GameObject:
   m_ObjectHideFlags: 0

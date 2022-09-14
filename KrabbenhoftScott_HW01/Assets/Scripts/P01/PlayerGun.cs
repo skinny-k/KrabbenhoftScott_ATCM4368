@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
-    [SerializeField] Bullet _bullet;
+    [SerializeField] Projectile _projectile;
     [SerializeField] protected ParticleSystem _fireParticles;
     [SerializeField] protected AudioClip _fireSFX;
     [SerializeField] float fireRate = 0.25f;
@@ -21,7 +21,7 @@ public class PlayerGun : MonoBehaviour
             }
             if (_fireSFX != null)
             {
-                AudioHelper.PlayClip2D(_fireSFX, 0.5f);
+                AudioHelper.PlayClip2D(_fireSFX, 0.1f);
             }
             Fire();
             cooldown = 0;
@@ -32,9 +32,9 @@ public class PlayerGun : MonoBehaviour
 
     void Fire()
     {
-        if (_bullet != null)
+        if (_projectile != null)
         {
-            Instantiate(_bullet, transform.position, transform.rotation);
+            Instantiate(_projectile, transform.position, transform.rotation);
         }
     }
 }

@@ -8,12 +8,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] float _defenseModifier = 0f;
     [SerializeField] float _healModifier = 1f;
 
-    [SerializeField] ParticleSystem _healParticles;
-    [SerializeField] AudioClip _healSFX;
-    [SerializeField] ParticleSystem _damageParticles;
-    [SerializeField] AudioClip _damageSFX;
-    [SerializeField] ParticleSystem _dieParticles;
-    [SerializeField] AudioClip _dieSFX;
+    [SerializeField] protected ParticleSystem _healParticles;
+    [SerializeField] protected AudioClip _healSFX;
+    [SerializeField] protected ParticleSystem _damageParticles;
+    [SerializeField] protected AudioClip _damageSFX;
+    [SerializeField] protected ParticleSystem _dieParticles;
+    [SerializeField] protected AudioClip _dieSFX;
+    [SerializeField] float _SFXVolume = 1f;
 
     int _currentHealth;
 
@@ -37,7 +38,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             }
             if (_damageSFX != null)
             {
-                AudioHelper.PlayClip3D(_damageSFX, 1f, transform.position);
+                AudioHelper.PlayClip3D(_damageSFX, _SFXVolume, transform.position);
             }
         }
     }
@@ -51,11 +52,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         if (_healSFX != null)
         {
-            AudioHelper.PlayClip3D(_healSFX, 1f, transform.position);
+            AudioHelper.PlayClip3D(_healSFX, _SFXVolume, transform.position);
         }
     }
 
-    void Kill()
+    protected virtual void Kill()
     {
         if (_dieParticles != null)
         {
@@ -63,8 +64,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
         if (_dieSFX != null)
         {
-            AudioHelper.PlayClip3D(_dieSFX, 1f, transform.position);
+            AudioHelper.PlayClip3D(_dieSFX, _SFXVolume, transform.position);
         }
+        
         gameObject.SetActive(false);
     }
 }

@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Eye : MonoBehaviour
 {
+    [Header("Eye Settings")]
+    [SerializeField] Color _normalColor;
+    [SerializeField] Color _normalEmissionColor;
+    [SerializeField] Color _alertColor;
+    [SerializeField] Color _alertEmissionColor;
+    
     GameObject pupil;
+    Vector3 lookTarget;
     float _blinkPeriod = 1f;
     float _minimumBlinkPeriod = 2f;
     float counter = 0f;
     float lastBlink = 0f;
-    Vector3 lookTarget;
 
     void Awake()
     {
@@ -33,6 +39,24 @@ public class Eye : MonoBehaviour
         }
 
         pupil.transform.localPosition = Vector3.Lerp(pupil.transform.localPosition, lookTarget, 0.1f);
+    }
+
+    public void SetColorNormal()
+    {
+        pupil.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_Color", _normalColor);
+        pupil.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", _normalEmissionColor);
+
+        pupil.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_Color", _normalColor);
+        pupil.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", _normalEmissionColor);
+    }
+
+    public void SetColorAlert()
+    {
+        pupil.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_Color", _alertColor);
+        pupil.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", _alertEmissionColor);
+
+        pupil.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_Color", _alertColor);
+        pupil.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", _alertEmissionColor);
     }
     
     IEnumerator Blink()

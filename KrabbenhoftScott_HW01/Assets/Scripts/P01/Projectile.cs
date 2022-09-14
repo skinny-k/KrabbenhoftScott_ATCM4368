@@ -11,11 +11,12 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] protected int _damage = 10;
     [SerializeField] protected ParticleSystem _impactParticles;
     [SerializeField] protected AudioClip _impactSFX;
-    protected Rigidbody RB;
+    [SerializeField] float _SFXVolume = 0.75f;
+    protected Rigidbody _rb;
 
     void Awake()
     {
-        RB = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -32,8 +33,21 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void Move()
     {
         Vector3 moveOffset = transform.forward * _travelSpeed;
-        RB.MovePosition(RB.position + moveOffset);
+        _rb.MovePosition(_rb.position + moveOffset);
     }
+
+    protected virtual void Feedback()
+    {
+        if (_impactParticles != null)
+        {
+            Instantiate(_impactParticles, transform.position, transform.rotation);
+        }
+        if (_impactSFX != null)
+        {
+            AudioHelper.PlayClip3D(_impactSFX, _SFXVolume, transform.position);
+        }
+    }
+
     protected virtual void Feedback(Collision collision)
     {
         if (_impactParticles != null)
@@ -42,7 +56,7 @@ public abstract class Projectile : MonoBehaviour
         }
         if (_impactSFX != null)
         {
-            AudioHelper.PlayClip3D(_impactSFX, 1.0f, transform.position);
+            AudioHelper.PlayClip3D(_impactSFX, _SFXVolume, transform.position);
         }
     }
 }
