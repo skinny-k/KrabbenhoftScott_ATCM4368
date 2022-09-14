@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public abstract class Projectile : MonoBehaviour
 {
@@ -10,13 +11,19 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField] protected float _travelSpeed = .25f;
     [SerializeField] protected int _damage = 10;
     [SerializeField] protected ParticleSystem _impactParticles;
-    [SerializeField] protected AudioClip _impactSFX;
     [SerializeField] float _SFXVolume = 0.75f;
+
     protected Rigidbody _rb;
+    protected AudioClip _ricochetSFX;
+    protected string[] _ricochetSFXIds;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+
+        _ricochetSFXIds = AssetDatabase.FindAssets("ricochet t:AudioClip", new[] {"Assets/Sounds/P01/Ricochets"});
+        string assetPath = AssetDatabase.GUIDToAssetPath(_ricochetSFXIds[Random.Range(0, _ricochetSFXIds.Length)]);
+        _ricochetSFX = (AudioClip)AssetDatabase.LoadAssetAtPath(assetPath, typeof(AudioClip));
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -42,9 +49,9 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        if (_impactSFX != null)
+        if (_ricochetSFX != null)
         {
-            AudioHelper.PlayClip3D(_impactSFX, _SFXVolume, transform.position);
+            AudioHelper.PlayClip3D(_ricochetSFX, _SFXVolume, transform.position);
         }
     }
 
@@ -54,9 +61,9 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        if (_impactSFX != null)
+        if (_ricochetSFX != null)
         {
-            AudioHelper.PlayClip3D(_impactSFX, _SFXVolume, transform.position);
+            AudioHelper.PlayClip3D(_ricochetSFX, _SFXVolume, transform.position);
         }
     }
 }
