@@ -447,10 +447,11 @@ public class Boss : Enemy
         StartCoroutine(_indicator.SetSprite(m_queen, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
-        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 45, 0)));
-        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 135, 0)));
+        for (int i = -1; i < 3; i++)
+        {
+            Laser laser = Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 45 * i, 0)));
+            laser.Damage = _laserDamage;
+        }
 
         moveType = null;
     }

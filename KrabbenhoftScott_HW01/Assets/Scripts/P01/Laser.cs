@@ -5,6 +5,13 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     float timer = 0f;
+    int _damage = 0;
+
+    public int Damage
+    {
+        get => _damage;
+        set => _damage = value;
+    }
     
     void Awake()
     {
@@ -28,6 +35,15 @@ public class Laser : MonoBehaviour
         if (timer >= 2)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            player.GetComponent<Health>().DecreaseHealth(_damage);
         }
     }
 }
