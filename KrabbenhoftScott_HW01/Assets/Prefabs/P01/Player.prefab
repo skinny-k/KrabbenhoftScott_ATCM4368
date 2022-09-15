@@ -6294,12 +6294,13 @@ MonoBehaviour:
   _maxHealth: 30
   _defenseModifier: 0
   _healModifier: 1
-  _healParticles: {fileID: 0}
-  _healSFX: {fileID: 0}
+  _healParticles: {fileID: 439881043729578222, guid: 1435425e3816b44e7802e732359f18da, type: 3}
+  _healSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
   _damageParticles: {fileID: 0}
-  _damageSFX: {fileID: 0}
-  _dieParticles: {fileID: 0}
-  _dieSFX: {fileID: 0}
+  _damageSFX: {fileID: 8300000, guid: 73b51ba9a4a1a4c2bbea508a0dd86319, type: 3}
+  _dieParticles: {fileID: 5569045393413846111, guid: bce7f3f9d33234b23ab754afadeccb9b, type: 3}
+  _dieSFX: {fileID: 8300000, guid: ae2b63c643c5946d9995a76f58b0c284, type: 3}
+  _SFXVolume: 1
 --- !u!1 &4745356231799827492
 GameObject:
   m_ObjectHideFlags: 0

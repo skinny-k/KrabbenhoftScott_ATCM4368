@@ -363,6 +363,7 @@
 "Assets/Scripts/P01/Health.cs"
 "Assets/Scripts/P01/IDamageable.cs"
 "Assets/Scripts/P01/IHealable.cs"
+"Assets/Scripts/P01/Laser.cs"
 "Assets/Scripts/P01/Pawn.cs"
 "Assets/Scripts/P01/Player.cs"
 "Assets/Scripts/P01/PlayerGun.cs"

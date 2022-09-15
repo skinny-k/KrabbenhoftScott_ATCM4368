@@ -14,6 +14,10 @@ public class Boss : Enemy
     [SerializeField] float _movePeriod = 4f;
     [SerializeField] float _jumpPower = 20f;
     [SerializeField] float _torquePower = 300f;
+
+    [Header("Damage Settings")]
+    [SerializeField] int _laserDamage;
+    [SerializeField] Laser laserPrefab;
     
     [Header("Sprite Materials")]
     [SerializeField] Material m_pawn;
@@ -23,11 +27,12 @@ public class Boss : Enemy
     [SerializeField] Material m_queen;
     [SerializeField] Material m_king;
 
-    public Light _light;
+    protected Light _light;
     protected Rigidbody _rb;
     protected BossMoveIndicator _indicator;
 
     BossHealth _health;
+    Health _playerHealth;
     Eye _eye;
     Vector3 _target;
     string moveType;
@@ -41,6 +46,7 @@ public class Boss : Enemy
         _indicator = transform.GetChild(0).GetComponent<BossMoveIndicator>();
         _light = transform.GetChild(1).GetComponent<Light>();
         _health = GetComponent<BossHealth>();
+        _playerHealth = player.GetComponent<Health>();
         _eye = transform.GetChild(2).GetComponent<Eye>();
         _eye.SetColorNormal();
         _target = transform.position;
@@ -441,6 +447,11 @@ public class Boss : Enemy
         StartCoroutine(_indicator.SetSprite(m_queen, _indicatorTime));
         yield return StartCoroutine(FlashLight());
 
+        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 45, 0)));
+        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+        Instantiate(laserPrefab, transform.position, Quaternion.Euler(new Vector3(0, 135, 0)));
+
         moveType = null;
     }
     
@@ -466,7 +477,7 @@ public class Boss : Enemy
         moveType = null;
     }
 
-    void OnCollisionEnter(Collision collision)
+    public override void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Game Plane")
         {
@@ -474,5 +485,6 @@ public class Boss : Enemy
             _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
             Instantiate(_jumpParticles, transform.position, transform.rotation);
         }
+        base.OnCollisionEnter(collision);
     }
 }
