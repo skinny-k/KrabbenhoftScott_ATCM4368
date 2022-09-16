@@ -566,6 +566,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5788467111565250154, guid: 49079409944884d18b37e673e039f7b9, type: 3}
     - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: quakePrefab
+      value: 
+      objectReference: {fileID: 7870780967383281947, guid: 44bf735d994a34562b719f7bbedb91b4, type: 3}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: _laserDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: _quakeDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
       propertyPath: _torquePower
       value: 18000
       objectReference: {fileID: 0}
@@ -617,6 +629,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4608175589685633775, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
 --- !u!1001 &8154761039049127310
@@ -629,6 +645,10 @@ PrefabInstance:
     - target: {fileID: 843456756381185770, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282452118270463209, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
+      propertyPath: _maxHealth
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2282452118270463209, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
       propertyPath: _damageParticles

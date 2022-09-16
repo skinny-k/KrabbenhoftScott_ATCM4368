@@ -22,12 +22,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     MeshRenderer _meshRenderer;
     Color _initialEmissionColor;
-    float _lastDamage = 0;
+    float _lastDamage;
     int _currentHealth;
 
     void Awake()
     {
         _currentHealth = _maxHealth;
+        _lastDamage = _iFrames;
         _meshRenderer = GetComponent<MeshRenderer>();
         if (_meshRenderer != null)
         {
@@ -45,7 +46,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     
     public void DecreaseHealth(Transform source, int damage)
     {
-        if (_iFrames != 0 && _lastDamage >= _iFrames)
+        if (_lastDamage >= _iFrames)
         {
             _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - _defenseModifier)), 0, _maxHealth);
             if (_currentHealth <= 0)

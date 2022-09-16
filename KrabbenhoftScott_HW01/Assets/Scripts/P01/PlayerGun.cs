@@ -13,7 +13,7 @@ public class PlayerGun : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && cooldown >= fireRate)
+        if (Input.GetMouseButtonDown(0) && cooldown >= fireRate)
         {
             if (_fireParticles != null)
             {

@@ -11,10 +11,20 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody _rb;
     float _moveModifier = 1f;
+    bool _inAir = false;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !_inAir)
+        {
+            _rb.AddForce(new Vector3(0, _jumpPower * 2.5f, 0));
+            _inAir = true;
+        }
     }
     
     void FixedUpdate()
@@ -41,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.name == "Game Plane")
         {
             Instantiate(_jumpParticles, transform.position, transform.rotation);
+            _inAir = false;
         }
     }
 

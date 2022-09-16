@@ -29,7 +29,7 @@ public class Laser : MonoBehaviour
         }
     }
     
-    void Update()
+    void FixedUpdate()
     {
         timer += Time.deltaTime;
         if (timer >= 2)
