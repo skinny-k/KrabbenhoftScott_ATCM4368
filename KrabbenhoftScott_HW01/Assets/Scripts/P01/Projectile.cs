@@ -15,15 +15,13 @@ public abstract class Projectile : MonoBehaviour
 
     protected Rigidbody _rb;
     protected AudioClip _ricochetSFX;
-    protected string[] _ricochetSFXIds;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
 
-        _ricochetSFXIds = AssetDatabase.FindAssets("ricochet t:AudioClip", new[] {"Assets/Sounds/P01/Ricochets"});
-        string assetPath = AssetDatabase.GUIDToAssetPath(_ricochetSFXIds[Random.Range(0, _ricochetSFXIds.Length)]);
-        _ricochetSFX = (AudioClip)AssetDatabase.LoadAssetAtPath(assetPath, typeof(AudioClip));
+        SFXContainer ricochetSFXContainer = GameObject.Find("RicochetSFXContainer").GetComponent<SFXContainer>();
+        _ricochetSFX = ricochetSFXContainer.SFX[Random.Range(0, ricochetSFXContainer.Length)];
     }
     
     private void OnCollisionEnter(Collision collision)

@@ -370,6 +370,7 @@
 "Assets/Scripts/P01/PlayerMovement.cs"
 "Assets/Scripts/P01/Projectile.cs"
 "Assets/Scripts/P01/Quake.cs"
+"Assets/Scripts/P01/SFXContainer.cs"
 "Assets/Scripts/P01/StandardBullet.cs"
 "Assets/Scripts/P01/TrackerBullet.cs"
 -langversion:9.0
