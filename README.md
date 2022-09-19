@@ -6,6 +6,7 @@
 # Aim   - Mouse
 # Shoot - LMB
 # Space - Jump
+# Esc   - Quit
 
 ### Innovations ###
 # Added a simple Pawn enemy to harass players while boss is stationary
