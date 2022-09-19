@@ -339,7 +339,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608175589685633775}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -360,21 +360,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 17.5
+  _contactDamage: 10
   player: {fileID: 0}
   pawnPrefab: {fileID: 584781080718503487, guid: bb9300316d27b420ea31432cfd8b36ee, type: 3}
   _jumpParticles: {fileID: 5569045393413846111, guid: f8999534029b44636b484e8e2ba43e96, type: 3}
   _indicatorTime: 0.5
   _flashTime: 0.125
   _movePeriod: 3.25
-  _jumpPower: 7500
-  _torquePower: 2000
+  _jumpPower: 80000
+  _torquePower: 18000
+  _laserDamage: 10
+  laserPrefab: {fileID: 5788467111565250154, guid: 49079409944884d18b37e673e039f7b9, type: 3}
+  _quakeDamage: 30
+  quakePrefab: {fileID: 7870780967383281947, guid: 44bf735d994a34562b719f7bbedb91b4, type: 3}
   m_pawn: {fileID: 2100000, guid: 641afc17822e047a998fc29edcc05951, type: 2}
   m_rook: {fileID: 2100000, guid: 629bc20dfb0cd47d493bfa24e0d1329a, type: 2}
   m_knight: {fileID: 2100000, guid: 79693bac8875446ac89eda31493f6528, type: 2}
   m_bishop: {fileID: 2100000, guid: fda54665d676943d7b3282563176f2f0, type: 2}
   m_queen: {fileID: 2100000, guid: b7fa2e20837ba43a9b4cd7268b7a6232, type: 2}
   m_king: {fileID: 2100000, guid: a67d045495843483db03c45fc58b2f42, type: 2}
-  _light: {fileID: 0}
 --- !u!114 &-2014703803190166487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,13 +394,17 @@ MonoBehaviour:
   _maxHealth: 500
   _defenseModifier: 0
   _healModifier: 1
+  _iFrames: 0
   _healParticles: {fileID: 439881043729578222, guid: 1435425e3816b44e7802e732359f18da, type: 3}
   _healSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
   _damageParticles: {fileID: 5569045393413846111, guid: be06ec230b5e04bce9c95f72c08416d9, type: 3}
   _damageSFX: {fileID: 8300000, guid: 73b51ba9a4a1a4c2bbea508a0dd86319, type: 3}
   _dieParticles: {fileID: 5569045393413846111, guid: 545e97fcff8b84319a38b26850ff4cd4, type: 3}
   _dieSFX: {fileID: 8300000, guid: af34bb361b2bb4327b65d58226f4d396, type: 3}
+  _damageEmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  _SFXVolume: 1
   isDying: 0
+  dyingFor: 0
 --- !u!1 &4608175590083341877
 GameObject:
   m_ObjectHideFlags: 0

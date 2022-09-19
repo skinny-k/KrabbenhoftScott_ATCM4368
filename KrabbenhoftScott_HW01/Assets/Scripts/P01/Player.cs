@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] public CanvasController _HUD;
+    
     // Start is called before the first frame update
     void Start()
     {

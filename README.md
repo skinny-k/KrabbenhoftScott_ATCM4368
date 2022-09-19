@@ -12,6 +12,4 @@
 # Used particle trigger system to cull particles used by the lasers
 
 ### TO-DO ###
-# Add radial quake attack to Pawn attack
 # Implement multiple projectile types
-# Add camera shake?

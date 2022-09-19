@@ -6193,7 +6193,7 @@ GameObject:
   - component: {fileID: 4410242408549707535}
   - component: {fileID: 5784133833903866664}
   - component: {fileID: 3124905947755927905}
-  - component: {fileID: 2282452118270463209}
+  - component: {fileID: 2091364538726701764}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6236,7 +6236,7 @@ MonoBehaviour:
   _lookTarget: {fileID: 0}
   _jumpParticles: {fileID: 5569045393413846111, guid: f8999534029b44636b484e8e2ba43e96, type: 3}
   _moveSpeed: 7.5
-  _jumpPower: 10
+  _jumpPower: 120
 --- !u!54 &4410242408549707535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6279,7 +6279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dde25bd51c84c5aa22c482ca54a49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2282452118270463209
+  _HUD: {fileID: 0}
+--- !u!114 &2091364538726701764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6288,18 +6289,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4410242408549707761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c048856282b47f78e410365aa956a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2efe1bad1bd4f421abf22ea68649085b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  _maxHealth: 75
   _defenseModifier: 0
   _healModifier: 1
+  _iFrames: 0.5
   _healParticles: {fileID: 439881043729578222, guid: 1435425e3816b44e7802e732359f18da, type: 3}
   _healSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
-  _damageParticles: {fileID: 0}
+  _damageParticles: {fileID: 5569045393413846111, guid: 27429eac080084741807e8c1ff9b376d, type: 3}
   _damageSFX: {fileID: 8300000, guid: 73b51ba9a4a1a4c2bbea508a0dd86319, type: 3}
   _dieParticles: {fileID: 5569045393413846111, guid: bce7f3f9d33234b23ab754afadeccb9b, type: 3}
   _dieSFX: {fileID: 8300000, guid: ae2b63c643c5946d9995a76f58b0c284, type: 3}
+  _damageEmissionColor: {r: 0.58, g: 0.10633333, b: 0, a: 1}
   _SFXVolume: 1
 --- !u!1 &4745356231799827492
 GameObject:

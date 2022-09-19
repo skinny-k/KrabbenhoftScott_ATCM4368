@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrackerBullet : Projectile
 {
+    [SerializeField] int _damage = 10;
     [SerializeField] float _lifetime = 5f;
     [SerializeField] float _turnSpd = 5f;
 

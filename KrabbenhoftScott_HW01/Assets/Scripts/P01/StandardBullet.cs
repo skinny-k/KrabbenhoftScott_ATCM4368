@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StandardBullet : Projectile
 {
+    [SerializeField] int _damage = 10;
+    
     protected override void Impact(Collision collision)
     {
         IDamageable target = collision.gameObject.GetComponent<IDamageable>();

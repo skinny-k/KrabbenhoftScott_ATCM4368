@@ -5,10 +5,10 @@ using UnityEngine;
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
     [Header("Health Settings")]
-    [SerializeField] int _maxHealth = 30;
-    [SerializeField] float _defenseModifier = 0f;
-    [SerializeField] float _healModifier = 1f;
-    [SerializeField] float _iFrames = 0.5f;
+    [SerializeField] protected int _maxHealth = 30;
+    [SerializeField] protected float _defenseModifier = 0f;
+    [SerializeField] protected float _healModifier = 1f;
+    [SerializeField] protected float _iFrames = 0.5f;
 
     [Header("Health Feedback")]
     [SerializeField] protected ParticleSystem _healParticles;
@@ -18,14 +18,14 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] protected ParticleSystem _dieParticles;
     [SerializeField] protected AudioClip _dieSFX;
     [SerializeField] protected Color _damageEmissionColor = Color.black;
-    [SerializeField] float _SFXVolume = 1f;
+    [SerializeField] protected float _SFXVolume = 1f;
 
     MeshRenderer _meshRenderer;
     Color _initialEmissionColor;
-    float _lastDamage;
-    int _currentHealth;
+    protected float _lastDamage;
+    protected int _currentHealth;
 
-    void Awake()
+    public virtual void Awake()
     {
         _currentHealth = _maxHealth;
         _lastDamage = _iFrames;
@@ -44,7 +44,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
     }
     
-    public void DecreaseHealth(Transform source, int damage)
+    public virtual void DecreaseHealth(Transform source, int damage)
     {
         if (_lastDamage >= _iFrames)
         {
@@ -74,28 +74,32 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
     }
 
-    public void DecreaseHealth(int damage)
+    public virtual void DecreaseHealth(int damage)
     {
-        _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - _defenseModifier)), 0, _maxHealth);
-        if (_currentHealth <= 0)
+        if (_lastDamage >= _iFrames)
         {
-            Kill();
-        }
-        else
-        {
-            if (_damageParticles != null)
+            _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - _defenseModifier)), 0, _maxHealth);
+            if (_currentHealth <= 0)
             {
-                Instantiate(_damageParticles, transform);
+                Kill();
             }
-            else if (_meshRenderer != null)
+            else
             {
-                StartCoroutine(FlashRed(_iFrames - 0.1f));
-            }
+                if (_damageParticles != null)
+                {
+                    Instantiate(_damageParticles, transform);
+                }
+                else if (_meshRenderer != null)
+                {
+                    StartCoroutine(FlashRed(_iFrames - 0.1f));
+                }
 
-            if (_damageSFX != null)
-            {
-                AudioHelper.PlayClip3D(_damageSFX, _SFXVolume, transform.position);
-            }
+                if (_damageSFX != null)
+                {
+                    AudioHelper.PlayClip3D(_damageSFX, _SFXVolume, transform.position);
+                }
+           }
+            _lastDamage = 0;
         }
     }
 

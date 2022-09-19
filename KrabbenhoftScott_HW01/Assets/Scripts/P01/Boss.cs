@@ -37,11 +37,12 @@ public class Boss : Enemy
     Health _playerHealth;
     Eye _eye;
     Vector3 _target;
+    Vector3 _pawnPosition = Vector3.zero;
     string moveType;
     float _moveTimer = 0f;
     bool _needsTarget = false;
     bool _inMove = false;
-    bool _needsQuake = false;
+    bool _needsPawn = false;
 
     void Awake()
     {
@@ -408,11 +409,9 @@ public class Boss : Enemy
         yield return StartCoroutine(FlashLight());
 
         _rb.AddForce(new Vector3(0, _jumpPower * 0.35f, 0));
-        _needsQuake = true;
+        _needsPawn = true;
 
-        // find valid space
-        Pawn pawn = Instantiate(pawnPrefab, position, Quaternion.identity);
-        pawn.player = player;
+        _pawnPosition = position;
 
         moveType = null;
     }
@@ -489,13 +488,16 @@ public class Boss : Enemy
             _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
             _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
             Instantiate(_jumpParticles, transform.position, Quaternion.identity);
+            StartCoroutine(Camera.main.GetComponent<CameraController>().Shake());
 
-            if (_needsQuake)
+            if (_needsPawn)
             {
                 Quake quake = Instantiate(quakePrefab, transform.position, Quaternion.identity);
                 quake.Damage = _quakeDamage;
                 quake.Target = player;
-                _needsQuake = false;
+                Pawn pawn = Instantiate(pawnPrefab, _pawnPosition, Quaternion.identity);
+                pawn.player = player;
+                _needsPawn = false;
             }
         }
         base.OnCollisionEnter(collision);

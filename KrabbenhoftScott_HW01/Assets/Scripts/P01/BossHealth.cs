@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossHealth : Health
 {
-    ParticleSystem dieParticles = null;
+    ParticleSystem dieParticles = null; // the actual instance of particles spawned on death, NOT THE PREFAB OBJECT
     public bool isDying = false;
     public float dyingFor = 0;
     
@@ -39,6 +39,7 @@ public class BossHealth : Health
 
         GetComponent<Rigidbody>().freezeRotation = true;
         GetComponent<Rigidbody>().isKinematic = true;
+        StartCoroutine(Camera.main.GetComponent<CameraController>().Shake(3.25f));
         isDying = true;
     }
 }
