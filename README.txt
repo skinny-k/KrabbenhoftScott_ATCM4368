@@ -14,3 +14,16 @@
 
 ### TO-DO ###
 # Implement multiple projectile types
+#     - Tracker Bullet
+#     - Triple Bullet
+#     - Explosive Bullet?
+#     - Mine Bullet?
+#     - Ricochet Shot?
+
+# Implement pickups to drop from Pawn enemies
+#     - Health Pickup
+#     - Bullet Types?
+#     - Invincibility
+#     - Defense Boost
+#     - Damage Boost
+#     - Speed Boost
