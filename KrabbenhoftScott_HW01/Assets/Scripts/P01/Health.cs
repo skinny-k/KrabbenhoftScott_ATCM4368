@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,18 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] protected Color _damageEmissionColor = Color.black;
     [SerializeField] protected float _SFXVolume = 1f;
 
+    public event Action OnSpawn;
+    public event Action OnTakeDamage;
+
+    public int MaxHealth
+    {
+        get => _maxHealth;
+    }
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+    }
+
     MeshRenderer _meshRenderer;
     Color _initialEmissionColor;
     protected float _lastDamage;
@@ -34,6 +47,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             _initialEmissionColor = _meshRenderer.material.GetColor("_EmissionColor");
         }
+        OnSpawn?.Invoke();
     }
 
     void FixedUpdate()
@@ -70,6 +84,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 }
             }
             
+            OnTakeDamage?.Invoke();
             _lastDamage = 0;
         }
     }
@@ -99,6 +114,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                     AudioHelper.PlayClip3D(_damageSFX, _SFXVolume, transform.position);
                 }
            }
+        
+            OnTakeDamage?.Invoke();
             _lastDamage = 0;
         }
     }

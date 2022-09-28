@@ -27,11 +27,15 @@ public class Pawn : Enemy
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public override void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Game Plane")
         {
             Instantiate(_jumpParticles, transform.position, transform.rotation);
+        }
+        else
+        {
+            base.OnCollisionEnter(collision);
         }
     }
 }

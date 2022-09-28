@@ -6193,7 +6193,7 @@ GameObject:
   - component: {fileID: 4410242408549707535}
   - component: {fileID: 5784133833903866664}
   - component: {fileID: 3124905947755927905}
-  - component: {fileID: 2091364538726701764}
+  - component: {fileID: 5813105450706591365}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6279,8 +6279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dde25bd51c84c5aa22c482ca54a49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HUD: {fileID: 0}
---- !u!114 &2091364538726701764
+--- !u!114 &5813105450706591365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6289,7 +6288,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4410242408549707761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efe1bad1bd4f421abf22ea68649085b, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c048856282b47f78e410365aa956a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 75
@@ -6302,7 +6301,7 @@ MonoBehaviour:
   _damageSFX: {fileID: 8300000, guid: 73b51ba9a4a1a4c2bbea508a0dd86319, type: 3}
   _dieParticles: {fileID: 5569045393413846111, guid: bce7f3f9d33234b23ab754afadeccb9b, type: 3}
   _dieSFX: {fileID: 8300000, guid: ae2b63c643c5946d9995a76f58b0c284, type: 3}
-  _damageEmissionColor: {r: 0.58, g: 0.10633333, b: 0, a: 1}
+  _damageEmissionColor: {r: 0, g: 0, b: 0, a: 1}
   _SFXVolume: 1
 --- !u!1 &4745356231799827492
 GameObject:

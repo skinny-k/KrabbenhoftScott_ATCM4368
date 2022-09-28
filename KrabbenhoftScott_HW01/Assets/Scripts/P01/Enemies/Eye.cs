@@ -31,7 +31,7 @@ public class Eye : MonoBehaviour
         if (counter >= _blinkPeriod)
         {
             counter = 0f;
-            lookTarget = new Vector3(Random.Range(-4, 5) / 10f, Random.Range(-4, 5) / 10f, pupil.transform.localPosition.z);
+            lookTarget = new Vector3(Random.Range(-3, 4) / 10f, Random.Range(-3, 4) / 10f, pupil.transform.localPosition.z);
             if (lastBlink >= _minimumBlinkPeriod && Random.Range(0, 2) == 0)
             {
                 StartCoroutine(Blink());

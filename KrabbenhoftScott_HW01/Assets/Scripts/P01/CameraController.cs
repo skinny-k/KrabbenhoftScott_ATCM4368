@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] Player _player;
+    
+    Health _playerHealth;
     Vector3 _startPos;
     bool _shaking = false;
 
     void Awake()
     {
         _startPos = transform.position;
+    }
+
+    void OnEnable()
+    {
+        _playerHealth = _player.GetComponent<Health>();
+        _playerHealth.OnTakeDamage += ShakeAction;
     }
     
     void FixedUpdate()
@@ -28,5 +37,15 @@ public class CameraController : MonoBehaviour
 
         _shaking = false;
         transform.position = _startPos;
+    }
+
+    public void ShakeAction()
+    {
+        StartCoroutine(Shake(0.1f));
+    }
+
+    void OnDisable()
+    {
+        _playerHealth.OnTakeDamage -= ShakeAction;
     }
 }
