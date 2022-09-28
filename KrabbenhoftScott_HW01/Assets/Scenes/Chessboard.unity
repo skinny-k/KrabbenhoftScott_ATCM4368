@@ -179,6 +179,7 @@ MonoBehaviour:
   _health: {fileID: 1892436650}
   _easeDelay: 0.5
   _easeSpeed: 30
+  _shakeTime: 0.25
 --- !u!114 &68238928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1610,7 @@ MonoBehaviour:
   _health: {fileID: 8154761039049127312}
   _easeDelay: 0.5
   _easeSpeed: 15
+  _shakeTime: 0.25
 --- !u!1 &1507529262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,7 +2309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Homuncubelus, Ruin of the Kingdom
+  m_text: Homuncubelus, Eternal Champion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e7a20163e8be455eb9991f185a9a2bb, type: 2}
   m_sharedMaterial: {fileID: 923005062100430252, guid: 9e7a20163e8be455eb9991f185a9a2bb, type: 2}

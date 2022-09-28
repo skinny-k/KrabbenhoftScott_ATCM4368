@@ -9,13 +9,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Health _health;
     [SerializeField] float _easeDelay = 0.25f;
     [SerializeField] float _easeSpeed = 15f;
+    [SerializeField] float _shakeTime = 0.25f;
     
     RectTransform _shakeCanvas;
     TMP_Text _healthText;
     Slider _literalHealth;
     Slider _easedHealth;
     float _waitTime = 0f;
-    float _shakeTime = 0.25f;
     bool _isShaking = false;
 
     void Awake()
