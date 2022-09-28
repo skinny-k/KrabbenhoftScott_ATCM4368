@@ -10,10 +10,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField] float _easeDelay = 0.25f;
     [SerializeField] float _easeSpeed = 15f;
     
+    RectTransform _shakeCanvas;
     TMP_Text _healthText;
     Slider _literalHealth;
     Slider _easedHealth;
     float _waitTime = 0f;
+    float _shakeTime = 0.25f;
+    bool _isShaking = false;
 
     void Awake()
     {
@@ -25,18 +28,25 @@ public class HealthBar : MonoBehaviour
         _easedHealth.maxValue = _health.MaxHealth;
         _easedHealth.value = _health.MaxHealth;
 
+        _shakeCanvas = transform.parent.GetComponent<RectTransform>();
         _healthText = transform.GetChild(2).GetComponent<TMP_Text>();
     }
 
     void OnEnable()
     {
-        _health.OnSpawn += SetHealth;
+        _health.OnSpawn += SetHealthBasic;
         _health.OnTakeDamage += SetHealth;
     }
 
-    void SetHealth()
+    void SetHealthBasic()
     {
         _literalHealth.value = _health.CurrentHealth;
+    }
+    
+    void SetHealth()
+    {
+        SetHealthBasic();
+        StartCoroutine(Shake());
     }
 
     void Update()
@@ -53,12 +63,29 @@ public class HealthBar : MonoBehaviour
                 }
             }
         }
+        if (_isShaking)
+        {
+            _shakeCanvas.anchoredPosition = new Vector2(Random.Range(-100, 101) / 10, Random.Range(-100, 101) / 10);
+        }
+        else if (_shakeCanvas.anchoredPosition != Vector2.zero)
+        {
+            _shakeCanvas.anchoredPosition = Vector2.zero;
+        }
         _healthText.text = _health.CurrentHealth + " / " + _health.MaxHealth;
+    }
+
+    IEnumerator Shake()
+    {
+        _isShaking = true;
+
+        yield return new WaitForSeconds(_shakeTime);
+
+        _isShaking = false;
     }
     
     void OnDisable()
     {
-        _health.OnSpawn -= SetHealth;
+        _health.OnSpawn -= SetHealthBasic;
         _health.OnTakeDamage -= SetHealth;
     }
 }
