@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
         Player player = collision.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            player.GetComponent<Health>().DecreaseHealth(_contactDamage);
+            player.DecreaseHealth(_contactDamage);
         }
     }
 }

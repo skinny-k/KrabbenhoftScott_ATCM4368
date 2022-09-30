@@ -48,10 +48,10 @@ public class Boss : Enemy
     {
         _rb = GetComponent<Rigidbody>();
         _indicator = transform.GetChild(0).GetComponent<BossMoveIndicator>();
-        _light = transform.GetChild(1).GetComponent<Light>();
+        _light = transform.GetChild(0).GetChild(0).GetComponent<Light>();
         _health = GetComponent<BossHealth>();
         _playerHealth = player.GetComponent<Health>();
-        _eye = transform.GetChild(2).GetComponent<Eye>();
+        _eye = transform.GetChild(1).GetComponent<Eye>();
         _eye.SetColorNormal();
         _target = transform.position;
 

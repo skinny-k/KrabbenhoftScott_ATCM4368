@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Health _health;
+    PlayerMovement _movement;
+    PlayerGun _gun;
+
+    void Awake()
     {
-        
+        _health = GetComponent<Health>();
+        _movement = GetComponent<PlayerMovement>();
+        _gun = transform.GetChild(4).GetComponent<PlayerGun>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ModifyDamage(float damageModifier, float duration)
     {
-        
+        StartCoroutine(_gun.ModifyDamage(damageModifier, duration));
+    }
+
+    public void ModifySpeed(float moveModifier, float duration)
+    {
+        StartCoroutine(_movement.ModifySpeed(moveModifier, duration));
+    }
+
+    public void ModifyDefense(float defenseModifier, float duration)
+    {
+        StartCoroutine(_health.ModifyDefense(defenseModifier, duration));
+    }
+
+    public void DecreaseHealth(Transform source, int damage)
+    {
+        _health.DecreaseHealth(source, damage);
+    }
+    
+    public void DecreaseHealth(int damage)
+    {
+        _health.DecreaseHealth(damage);
+    }
+    
+    public void IncreaseHealth(int heal)
+    {
+        _health.IncreaseHealth(heal);
     }
 }

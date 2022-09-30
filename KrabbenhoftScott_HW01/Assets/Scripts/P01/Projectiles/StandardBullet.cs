@@ -5,13 +5,15 @@ using UnityEngine;
 public class StandardBullet : Projectile
 {
     [SerializeField] int _damage = 10;
+
+    float _damageModifier = PlayerGun._damageModifier;
     
     protected override void Impact(Collision collision)
     {
         IDamageable target = collision.gameObject.GetComponent<IDamageable>();
         if (target != null)
         {
-            target.DecreaseHealth(transform, _damage);
+            target.DecreaseHealth(transform, (int)(_damage * _damageModifier));
         }
         Destroy(gameObject);
     }

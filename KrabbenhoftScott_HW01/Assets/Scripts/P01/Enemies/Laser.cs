@@ -43,7 +43,7 @@ public class Laser : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            player.GetComponent<Health>().DecreaseHealth(_damage);
+            player.DecreaseHealth(_damage);
         }
     }
 }

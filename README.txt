@@ -13,6 +13,8 @@
 # Used particle trigger system to cull particles used by the lasers
 
 ### TO-DO ###
+# FIX BOOST SYSTEMS -- use events!
+
 # Implement multiple projectile types
 #     - Tracker Bullet
 #     - Triple Bullet
@@ -20,10 +22,5 @@
 #     - Mine Bullet?
 #     - Ricochet Shot?
 
-# Implement pickups to drop from Pawn enemies
-#     - Health Pickup
-#     - Bullet Types?
-#     - Invincibility
-#     - Defense Boost
-#     - Damage Boost
-#     - Speed Boost
+# Implement bullet type pickups to drop from Pawn enemies
+#     - Bullet Types

@@ -46,15 +46,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Game Plane")
-        {
-            Instantiate(_jumpParticles, transform.position, transform.rotation);
-            _inAir = false;
-        }
-    }
-
     void TurnPlayer()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.farClipPlane));
@@ -65,5 +56,23 @@ public class PlayerMovement : MonoBehaviour
             _lookTarget.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             transform.LookAt(_lookTarget);
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Game Plane")
+        {
+            Instantiate(_jumpParticles, transform.position, transform.rotation);
+            _inAir = false;
+        }
+    }
+
+    public IEnumerator ModifySpeed(float moveModifier, float duration)
+    {
+        _moveModifier *= moveModifier;
+
+        yield return new WaitForSeconds(duration);
+
+        _moveModifier /= moveModifier;
     }
 }

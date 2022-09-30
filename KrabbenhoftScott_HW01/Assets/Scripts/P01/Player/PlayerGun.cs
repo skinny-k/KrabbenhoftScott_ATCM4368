@@ -9,6 +9,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] protected AudioClip _fireSFX;
     [SerializeField] float fireRate = 0.25f;
 
+    public static float _damageModifier = 1f;
     float cooldown = 0;
     
     void Update()
@@ -36,5 +37,14 @@ public class PlayerGun : MonoBehaviour
         {
             Instantiate(_projectile, transform.position, transform.rotation);
         }
+    }
+
+    public IEnumerator ModifyDamage(float damageModifier, float duration)
+    {
+        _damageModifier *= damageModifier;
+
+        yield return new WaitForSeconds(duration);
+
+        _damageModifier /= damageModifier;
     }
 }

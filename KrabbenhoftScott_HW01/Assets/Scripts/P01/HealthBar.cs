@@ -35,6 +35,7 @@ public class HealthBar : MonoBehaviour
     void OnEnable()
     {
         _health.OnSpawn += SetHealthBasic;
+        _health.OnHeal += SetHealthBasic;
         _health.OnTakeDamage += SetHealth;
     }
 

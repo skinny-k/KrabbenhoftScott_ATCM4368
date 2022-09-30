@@ -10,10 +10,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] protected float _defenseModifier = 0f;
     [SerializeField] protected float _healModifier = 1f;
     [SerializeField] protected float _iFrames = 0.5f;
+    [SerializeField] protected bool _hasDrops = false;
 
-    [Header("Health Feedback")]
-    [SerializeField] protected ParticleSystem _healParticles;
-    [SerializeField] protected AudioClip _healSFX;
+    [Header("Feedback Settings")]
     [SerializeField] protected ParticleSystem _damageParticles;
     [SerializeField] protected AudioClip _damageSFX;
     [SerializeField] protected ParticleSystem _dieParticles;
@@ -23,6 +22,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public event Action OnSpawn;
     public event Action OnTakeDamage;
+    public event Action OnHeal;
 
     public int MaxHealth
     {
@@ -62,7 +62,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (_lastDamage >= _iFrames)
         {
-            _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - _defenseModifier)), 0, _maxHealth);
+            _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - Mathf.Clamp(_defenseModifier, 0f, 1f))), 0, _maxHealth);
             if (_currentHealth <= 0)
             {
                 Kill();
@@ -93,7 +93,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (_lastDamage >= _iFrames)
         {
-            _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - _defenseModifier)), 0, _maxHealth);
+            _currentHealth = (int)Mathf.Clamp(_currentHealth - (damage * (1f - Mathf.Clamp(_defenseModifier, 0f, 1f))), 0, _maxHealth);
             if (_currentHealth <= 0)
             {
                 Kill();
@@ -123,6 +123,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public void IncreaseHealth(int heal)
     {
         _currentHealth = (int)Mathf.Clamp(_currentHealth + (heal * _healModifier), 0, _maxHealth);
+        
+        /*
         if (_healParticles != null)
         {
             Instantiate(_healParticles, transform.position, transform.rotation);
@@ -131,6 +133,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             AudioHelper.PlayClip3D(_healSFX, _SFXVolume, transform.position);
         }
+        */
+
+        OnHeal?.Invoke();
     }
 
     protected virtual void Kill()
@@ -143,6 +148,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         {
             AudioHelper.PlayClip3D(_dieSFX, _SFXVolume, transform.position);
         }
+
+        if (_hasDrops)
+        {
+            PickupSpawner.SpawnPickup(transform.position);
+        }
         
         gameObject.SetActive(false);
     }
@@ -154,5 +164,14 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         yield return new WaitForSeconds(duration);
 
         GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", _initialEmissionColor);
+    }
+
+    public IEnumerator ModifyDefense(float defenseModifier, float duration)
+    {
+        _defenseModifier += defenseModifier;
+
+        yield return new WaitForSeconds(duration);
+
+        _defenseModifier -= defenseModifier;
     }
 }
