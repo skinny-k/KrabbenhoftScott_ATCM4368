@@ -123,17 +123,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public void IncreaseHealth(int heal)
     {
         _currentHealth = (int)Mathf.Clamp(_currentHealth + (heal * _healModifier), 0, _maxHealth);
-        
-        /*
-        if (_healParticles != null)
-        {
-            Instantiate(_healParticles, transform.position, transform.rotation);
-        }
-        if (_healSFX != null)
-        {
-            AudioHelper.PlayClip3D(_healSFX, _SFXVolume, transform.position);
-        }
-        */
 
         OnHeal?.Invoke();
     }

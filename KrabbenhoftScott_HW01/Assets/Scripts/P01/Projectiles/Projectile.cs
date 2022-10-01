@@ -11,13 +11,13 @@ public abstract class Projectile : MonoBehaviour
     [Header("Base Settings")]
     [SerializeField] protected float _travelSpeed = .25f;
     [SerializeField] protected ParticleSystem _impactParticles;
-    [SerializeField] float _SFXVolume = 0.75f;
+    [SerializeField] protected float _SFXVolume = 0.75f;
 
     protected Rigidbody _rb;
 
     public static event Action<Transform> OnImpact;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }

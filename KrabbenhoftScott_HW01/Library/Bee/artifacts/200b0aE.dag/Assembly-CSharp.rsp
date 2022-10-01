@@ -377,9 +377,11 @@
 "Assets/Scripts/P01/Player/PlayerGun.cs"
 "Assets/Scripts/P01/Player/PlayerMovement.cs"
 "Assets/Scripts/P01/PlayerHealthCanvasController.cs"
+"Assets/Scripts/P01/Projectiles/ExplosiveBullet.cs"
 "Assets/Scripts/P01/Projectiles/Projectile.cs"
 "Assets/Scripts/P01/Projectiles/StandardBullet.cs"
 "Assets/Scripts/P01/Projectiles/TrackerBullet.cs"
+"Assets/Scripts/P01/Projectiles/TripleBullet.cs"
 "Assets/Scripts/P01/SFXContainer.cs"
 -langversion:9.0
 

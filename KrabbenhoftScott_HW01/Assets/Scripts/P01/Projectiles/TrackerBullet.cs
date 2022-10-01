@@ -8,22 +8,27 @@ public class TrackerBullet : Projectile
     [SerializeField] float _lifetime = 5f;
     [SerializeField] float _turnSpd = 5f;
 
-    GameObject boss;
+    Enemy target;
     Quaternion _lookRot;
     float _timer = 0f;
+
+    float _damageModifier = PlayerGun._damageModifier;
     
     void Awake()
     {
-        boss = GameObject.Find("Boss");
+        target = FindTarget();
+        base.Awake();
     }
     
-    void FixedUpdate()
+    protected override void Move()
     {
-        if (boss != null)
+        if (target != null)
         {
-            _lookRot = Quaternion.LookRotation((boss.transform.position - transform.position).normalized);
+            _lookRot = Quaternion.LookRotation((target.transform.position - transform.position).normalized);
             _rb.rotation = Quaternion.Lerp(_rb.rotation, _lookRot, _turnSpd * Time.deltaTime);
         }
+        base.Move();
+
         _timer += Time.deltaTime;
         if (_timer >= _lifetime)
         {
@@ -36,7 +41,7 @@ public class TrackerBullet : Projectile
         IDamageable target = collision.gameObject.GetComponent<IDamageable>();
         if (target != null)
         {
-            target.DecreaseHealth(transform, _damage);
+            target.DecreaseHealth(transform, (int)(_damage * _damageModifier));
         }
         Destroy(gameObject);
     }
@@ -46,6 +51,29 @@ public class TrackerBullet : Projectile
         if (!collision.gameObject.CompareTag("Enemy"))
         {
             base.Feedback();
+        }
+    }
+
+    Enemy FindTarget()
+    {
+        Object[] enemies = Object.FindObjectsOfType(typeof(Enemy));
+        
+        Enemy nearestEnemy = null;
+        
+        if (enemies.Length > 0)
+        {
+            foreach (Enemy enemy in enemies)
+            {
+                if (nearestEnemy == null || Vector3.Distance(transform.position, nearestEnemy.transform.position) < Vector3.Distance(transform.position, enemy.transform.position))
+                {
+                    nearestEnemy = enemy;
+                }
+            }
+            return nearestEnemy;
+        }
+        else
+        {
+            return null;
         }
     }
 }

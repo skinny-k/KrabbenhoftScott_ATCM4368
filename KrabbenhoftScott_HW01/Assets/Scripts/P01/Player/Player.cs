@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,11 @@ public class Player : MonoBehaviour
     Health _health;
     PlayerMovement _movement;
     PlayerGun _gun;
+
+    public event Action<int> OnPlayerHeal;
+    public event Action OnDamageBoost;
+    public event Action OnSpeedBoost;
+    public event Action OnDefenseBoost;
 
     void Awake()
     {

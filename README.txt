@@ -13,14 +13,22 @@
 # Used particle trigger system to cull particles used by the lasers
 
 ### TO-DO ###
-# FIX BOOST SYSTEMS -- use events!
+# Find Additional SFX
+#     - Explosion for explosive bullets
+#     - SFX for boss all boss attacks
+#         - Queen Lasers
+#         - Quake
+#         - Impact?
+#     - Powerups
+#     - Background Music?
 
-# Implement multiple projectile types
-#     - Tracker Bullet
-#     - Triple Bullet
-#     - Explosive Bullet?
-#     - Mine Bullet?
-#     - Ricochet Shot?
+# Create feedback for powerups
+#     - DamageBoost (particles, SFX)
+#     - DefenseBoost (particles, SFX)
+#     - SpeedBoost (particles, SFX)
+#     - Invincibility (SFX, material? or particles)
 
-# Implement bullet type pickups to drop from Pawn enemies
-#     - Bullet Types
+# Implement bullet type pickups to drop from Pawn enemies. Each should provide limited # of bullets
+#     - ExplosiveBullet
+#     - TrackerBullet
+#     - TripleBullet
