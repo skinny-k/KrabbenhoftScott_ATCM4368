@@ -21,6 +21,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     public event Action OnSpawn;
     public event Action OnTakeDamage;
+    public event Action OnDie;
     public event Action OnHeal;
 
     public int MaxHealth
@@ -137,6 +138,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             AudioHelper.PlayClip3D(_dieSFX, _SFXVolume, transform.position);
         }
         
+        OnDie?.Invoke();
         gameObject.SetActive(false);
     }
 

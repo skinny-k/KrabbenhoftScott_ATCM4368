@@ -14,8 +14,6 @@
 # Special limited ammunition may be picked up from enemy drops
 
 ### TO-DO ###
-# Add despawn to pickups
-
 # Find Additional SFX
 #     - Explosion for explosive bullets
 #     - SFX for boss all boss attacks

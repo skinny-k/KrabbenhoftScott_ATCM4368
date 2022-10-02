@@ -9,6 +9,7 @@ public abstract class Collectible : MonoBehaviour
     [SerializeField] float _rotationSpeed = 90f;
     [SerializeField] float _bobPeriod = 1f;
     [SerializeField] float _bobAmplitude = 0.25f;
+    [SerializeField] float _lifetime = 5f;
 
     [Header("Feedback Settings")]
     [SerializeField] ParticleSystem _collectParticles;
@@ -19,6 +20,7 @@ public abstract class Collectible : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        StartCoroutine(Despawn());
     }
     
     void FixedUpdate()
@@ -59,5 +61,21 @@ public abstract class Collectible : MonoBehaviour
         {
             AudioHelper.PlayClip2D(_collectSFX, 1f);
         }
+    }
+
+    protected virtual IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(_lifetime - 1.2f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < transform.childCount; j++)
+            {
+                transform.GetChild(j).gameObject.SetActive(!transform.GetChild(j).gameObject.activeSelf);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Destroy(gameObject);
     }
 }

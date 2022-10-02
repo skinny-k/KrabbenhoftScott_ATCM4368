@@ -10,11 +10,18 @@ public class Pawn : Enemy, IDropsPickups
     public Player player;
 
     Rigidbody _rb;
+    Health _health;
     float _moveModifier = 1f;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _health = GetComponent<Health>();
+    }
+
+    void OnEnable()
+    {
+        _health.OnDie += SpawnPickups;
     }
     
     protected override void Move()
@@ -50,7 +57,7 @@ public class Pawn : Enemy, IDropsPickups
 
     void OnDisable()
     {
-        SpawnPickups();
+        _health.OnDie -= SpawnPickups;
         Destroy(gameObject);
     }
 }
