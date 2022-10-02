@@ -11,8 +11,11 @@
 ### Innovations ###
 # Added a simple Pawn enemy to harass players while boss is stationary
 # Used particle trigger system to cull particles used by the lasers
+# Special limited ammunition may be picked up from enemy drops
 
 ### TO-DO ###
+# Add despawn to pickups
+
 # Find Additional SFX
 #     - Explosion for explosive bullets
 #     - SFX for boss all boss attacks
@@ -22,13 +25,11 @@
 #     - Powerups
 #     - Background Music?
 
+# Create UI for ammo types. Should display type and amount remaining
+
 # Create feedback for powerups
 #     - DamageBoost (particles, SFX)
 #     - DefenseBoost (particles, SFX)
 #     - SpeedBoost (particles, SFX)
 #     - Invincibility (SFX, material? or particles)
-
-# Implement bullet type pickups to drop from Pawn enemies. Each should provide limited # of bullets
-#     - ExplosiveBullet
-#     - TrackerBullet
-#     - TripleBullet
+#     - Ammo pickups (SFX, particles?)

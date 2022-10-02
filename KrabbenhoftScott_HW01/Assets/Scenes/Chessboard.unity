@@ -927,11 +927,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickups:
+  - {fileID: 5631823566320033384, guid: 7a691cac0dfb6413f8ef81162306403d, type: 3}
+  - {fileID: 5631823566320033384, guid: 25f3a3e45042542ecb119ec32a211eb2, type: 3}
+  - {fileID: 5631823566320033384, guid: c15ace90334b54da8952bcab2ce4d2ef, type: 3}
+  - {fileID: 293834526275336717, guid: d28f40e91cd9346e48b6643a1cacb437, type: 3}
   - {fileID: 293834526275336717, guid: d28f40e91cd9346e48b6643a1cacb437, type: 3}
   - {fileID: 3453446460053386250, guid: 52ac884c76fd04757bae6911f58741f0, type: 3}
+  - {fileID: 3453446460053386250, guid: 52ac884c76fd04757bae6911f58741f0, type: 3}
+  - {fileID: 7719109429253174550, guid: 29f998d39f67c4be28c1fe800d454679, type: 3}
+  - {fileID: 7719109429253174550, guid: 29f998d39f67c4be28c1fe800d454679, type: 3}
+  - {fileID: -3789416020359362021, guid: 2a3709e91548444c68e15f71b7e4456f, type: 3}
+  - {fileID: -3789416020359362021, guid: 2a3709e91548444c68e15f71b7e4456f, type: 3}
+  - {fileID: -3789416020359362021, guid: 2a3709e91548444c68e15f71b7e4456f, type: 3}
   - {fileID: -3789416020359362021, guid: 2a3709e91548444c68e15f71b7e4456f, type: 3}
   - {fileID: 6192683667511546328, guid: ee0cceb090f49469bbf49e6959b998bf, type: 3}
-  - {fileID: 7719109429253174550, guid: 29f998d39f67c4be28c1fe800d454679, type: 3}
 --- !u!4 &802813618
 Transform:
   m_ObjectHideFlags: 0
@@ -2566,7 +2575,7 @@ PrefabInstance:
       objectReference: {fileID: 132170927}
     - target: {fileID: 3636747126755278764, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
       propertyPath: m_VersionIndex
-      value: 449
+      value: 455
       objectReference: {fileID: 0}
     - target: {fileID: 3655359616272412005, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
       propertyPath: m_Layer
@@ -2666,6 +2675,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8532394737892425211, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
       propertyPath: _projectile
+      value: 
+      objectReference: {fileID: 8810881072085081540, guid: 5a97a6918d5ff44c7ac0342c563f5b34, type: 3}
+    - target: {fileID: 8532394737892425211, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}
+      propertyPath: _standardProjectile
       value: 
       objectReference: {fileID: 8810881072085081540, guid: 5a97a6918d5ff44c7ac0342c563f5b34, type: 3}
     - target: {fileID: 8691563019219519958, guid: 0947d544f0f8a4bd99d134d86eabb8ed, type: 3}

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pawn : Enemy
+public class Pawn : Enemy, IDropsPickups
 {
     [SerializeField] ParticleSystem _jumpParticles;
     [SerializeField] float _jumpPower = 10f;
+    [SerializeField] int _pickupDropChance = 60;
     public Player player;
 
     Rigidbody _rb;
@@ -37,5 +38,19 @@ public class Pawn : Enemy
         {
             base.OnCollisionEnter(collision);
         }
+    }
+
+    public void SpawnPickups()
+    {
+        if (Random.Range(0, 101) <= _pickupDropChance)
+        {
+            PickupSpawner.SpawnPickup(transform.position);
+        }
+    }
+
+    void OnDisable()
+    {
+        SpawnPickups();
+        Destroy(gameObject);
     }
 }

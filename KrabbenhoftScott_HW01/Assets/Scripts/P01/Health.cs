@@ -10,7 +10,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] protected float _defenseModifier = 0f;
     [SerializeField] protected float _healModifier = 1f;
     [SerializeField] protected float _iFrames = 0.5f;
-    [SerializeField] protected bool _hasDrops = false;
 
     [Header("Feedback Settings")]
     [SerializeField] protected ParticleSystem _damageParticles;
@@ -136,11 +135,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (_dieSFX != null)
         {
             AudioHelper.PlayClip3D(_dieSFX, _SFXVolume, transform.position);
-        }
-
-        if (_hasDrops)
-        {
-            PickupSpawner.SpawnPickup(transform.position);
         }
         
         gameObject.SetActive(false);

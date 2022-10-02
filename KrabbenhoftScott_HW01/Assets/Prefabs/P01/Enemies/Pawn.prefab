@@ -304,6 +304,7 @@ MonoBehaviour:
   _contactDamage: 10
   _jumpParticles: {fileID: 5569045393413846111, guid: f8999534029b44636b484e8e2ba43e96, type: 3}
   _jumpPower: 120
+  _pickupDropChance: 100
   player: {fileID: 0}
 --- !u!54 &3641742148147475714
 Rigidbody:
@@ -351,9 +352,6 @@ MonoBehaviour:
   _defenseModifier: 0
   _healModifier: 1
   _iFrames: 0
-  _hasDrops: 1
-  _healParticles: {fileID: 5569045393413846111, guid: be06ec230b5e04bce9c95f72c08416d9, type: 3}
-  _healSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
   _damageParticles: {fileID: 2574850559645085233, guid: 524c0a44b6c9e40e89bf3a6f6c4093eb, type: 3}
   _damageSFX: {fileID: 8300000, guid: 73b51ba9a4a1a4c2bbea508a0dd86319, type: 3}
   _dieParticles: {fileID: 5569045393413846111, guid: fecb9183f315c4a1295aadbe12e330a3, type: 3}

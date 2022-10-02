@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
-    [SerializeField] Projectile _projectile;
+    [SerializeField] Projectile _standardProjectile;
     [SerializeField] protected ParticleSystem _fireParticles;
     [SerializeField] protected AudioClip _fireSFX;
     [SerializeField] float fireRate = 0.25f;
 
+    Projectile _projectile;
+    int _specialAmmoCount = 0;
+    
     public static float _damageModifier = 1f;
     float cooldown = 0;
+    
+    void OnEnable()
+    {
+        _projectile = _standardProjectile;
+        _specialAmmoCount = 0;
+        
+        AmmoSwapPickup.OnCollect += GiveAmmo;
+    }
     
     void Update()
     {
@@ -36,7 +47,21 @@ public class PlayerGun : MonoBehaviour
         if (_projectile != null)
         {
             Instantiate(_projectile, transform.position, transform.rotation);
+            if (_projectile != _standardProjectile)
+            {
+                _specialAmmoCount--;
+                if (_specialAmmoCount <= 0)
+                {
+                    _projectile = _standardProjectile;
+                }
+            }
         }
+    }
+
+    public void GiveAmmo(Projectile ammo, int count)
+    {
+        _projectile = ammo;
+        _specialAmmoCount = count;
     }
 
     public IEnumerator ModifyDamage(float damageModifier, float duration)
@@ -46,5 +71,10 @@ public class PlayerGun : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         _damageModifier /= damageModifier;
+    }
+
+    void OnDisable()
+    {
+        AmmoSwapPickup.OnCollect -= GiveAmmo;
     }
 }

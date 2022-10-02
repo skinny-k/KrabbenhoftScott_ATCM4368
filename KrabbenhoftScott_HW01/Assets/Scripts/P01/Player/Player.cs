@@ -36,6 +36,11 @@ public class Player : MonoBehaviour
         StartCoroutine(_health.ModifyDefense(defenseModifier, duration));
     }
 
+    public void GiveAmmo(Projectile ammo, int count)
+    {
+        _gun.GiveAmmo(ammo, count);
+    }
+
     public void DecreaseHealth(Transform source, int damage)
     {
         _health.DecreaseHealth(source, damage);

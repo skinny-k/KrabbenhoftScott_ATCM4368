@@ -24,9 +24,6 @@ public class PickupSpawner : MonoBehaviour
 
     public static void SpawnPickup(Vector3 location)
     {
-        if (UnityEngine.Random.Range(0, 2) == 1)
-        {
-            Instantiate(Instance.pickups[UnityEngine.Random.Range(0, Instance.pickups.Length)], location, Quaternion.identity);
-        }
+        Instantiate(Instance.pickups[UnityEngine.Random.Range(0, Instance.pickups.Length)], location, Quaternion.identity);
     }
 }
