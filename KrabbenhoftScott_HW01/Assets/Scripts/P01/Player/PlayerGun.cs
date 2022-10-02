@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] protected AudioClip _fireSFX;
     [SerializeField] float fireRate = 0.25f;
 
+    public event Action<Projectile, int> OnAmmoChange;
+    
     Projectile _projectile;
     int _specialAmmoCount = 0;
     
@@ -55,6 +58,7 @@ public class PlayerGun : MonoBehaviour
                     _projectile = _standardProjectile;
                 }
             }
+            OnAmmoChange?.Invoke(_projectile, _specialAmmoCount);
         }
     }
 
@@ -62,6 +66,7 @@ public class PlayerGun : MonoBehaviour
     {
         _projectile = ammo;
         _specialAmmoCount = count;
+        OnAmmoChange?.Invoke(_projectile, _specialAmmoCount);
     }
 
     public IEnumerator ModifyDamage(float damageModifier, float duration)

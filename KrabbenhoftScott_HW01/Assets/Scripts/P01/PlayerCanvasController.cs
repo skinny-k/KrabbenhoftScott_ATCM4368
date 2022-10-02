@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthCanvasController : MonoBehaviour
+public class PlayerCanvasController : MonoBehaviour
 {
     [SerializeField] float _damageFlashDuration = 0.25f;
     [SerializeField] Player _player;

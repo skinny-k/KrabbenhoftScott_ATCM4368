@@ -336,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3242487464594385424}
   - component: {fileID: 6317263029671602229}
-  - component: {fileID: 4551493145279054978}
+  - component: {fileID: 5468225743970284554}
   - component: {fileID: 7719109429253174550}
   m_Layer: 0
   m_Name: SpeedBoost
@@ -379,8 +379,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &4551493145279054978
-BoxCollider:
+--- !u!136 &5468225743970284554
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -389,8 +389,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1, z: 1}
+  m_Radius: 0.75
+  m_Height: 0
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7719109429253174550
 MonoBehaviour:
@@ -404,6 +405,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00a26bdaf63d431e8576d7759c3988e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rotationSpeed: 90
+  _bobPeriod: 1
+  _bobAmplitude: 0.25
+  _lifetime: 5
+  _collectParticles: {fileID: 0}
+  _collectSFX: {fileID: 0}
+  _boostPercent: 50
+  _duration: 5
 --- !u!1 &8861507108120365735
 GameObject:
   m_ObjectHideFlags: 0

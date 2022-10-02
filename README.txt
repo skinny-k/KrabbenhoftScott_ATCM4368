@@ -23,8 +23,6 @@
 #     - Powerups
 #     - Background Music?
 
-# Create UI for ammo types. Should display type and amount remaining
-
 # Create feedback for powerups
 #     - DamageBoost (particles, SFX)
 #     - DefenseBoost (particles, SFX)

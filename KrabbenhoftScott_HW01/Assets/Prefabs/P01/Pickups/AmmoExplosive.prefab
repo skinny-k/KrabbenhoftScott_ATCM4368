@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511987942419501410}
   - component: {fileID: 6090162795765440848}
-  - component: {fileID: 2774412777509598887}
+  - component: {fileID: 4524068520711689524}
   - component: {fileID: 5631823566320033384}
   m_Layer: 0
   m_Name: AmmoExplosive
@@ -134,8 +134,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2774412777509598887
-BoxCollider:
+--- !u!136 &4524068520711689524
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -144,8 +144,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1, z: 1}
+  m_Radius: 0.75
+  m_Height: 0
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5631823566320033384
 MonoBehaviour:
@@ -162,6 +163,7 @@ MonoBehaviour:
   _rotationSpeed: 90
   _bobPeriod: 1
   _bobAmplitude: 0.25
+  _lifetime: 5
   _collectParticles: {fileID: 0}
   _collectSFX: {fileID: 0}
   _ammoPrefab: {fileID: 8543295167679241829, guid: 0f6a233ddc5a0478398030c1d3b2980c, type: 3}

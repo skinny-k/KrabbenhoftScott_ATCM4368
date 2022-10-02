@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +67,7 @@ public class HealthBar : MonoBehaviour
         }
         if (_isShaking)
         {
-            _shakeCanvas.anchoredPosition = new Vector2(Random.Range(-100, 101) / 10, Random.Range(-100, 101) / 10);
+            _shakeCanvas.anchoredPosition = new Vector2(UnityEngine.Random.Range(-100, 101) / 10, UnityEngine.Random.Range(-100, 101) / 10);
         }
         else if (_shakeCanvas.anchoredPosition != Vector2.zero)
         {

@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 3242487464594385424}
   - component: {fileID: -3789416020359362021}
   - component: {fileID: 6317263029671602229}
-  - component: {fileID: 4551493145279054978}
+  - component: {fileID: 6854693145343993117}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: Untagged
@@ -229,6 +229,7 @@ MonoBehaviour:
   _rotationSpeed: 90
   _bobPeriod: 1
   _bobAmplitude: 0.25
+  _lifetime: 5
   _collectParticles: {fileID: 439881043729578222, guid: 1435425e3816b44e7802e732359f18da, type: 3}
   _collectSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
   _healAmount: 5
@@ -248,8 +249,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &4551493145279054978
-BoxCollider:
+--- !u!136 &6854693145343993117
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -258,8 +259,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1, z: 1}
+  m_Radius: 0.75
+  m_Height: 0
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8861507108120365735
 GameObject:

@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3242487464594385424}
   - component: {fileID: 6317263029671602229}
-  - component: {fileID: 4551493145279054978}
+  - component: {fileID: 3871326724322249126}
   - component: {fileID: 6192683667511546328}
   m_Layer: 0
   m_Name: InvincibilityPickup
@@ -229,8 +229,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &4551493145279054978
-BoxCollider:
+--- !u!136 &3871326724322249126
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -239,8 +239,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1, z: 1}
+  m_Radius: 0.75
+  m_Height: 0
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6192683667511546328
 MonoBehaviour:
@@ -257,6 +258,7 @@ MonoBehaviour:
   _rotationSpeed: 90
   _bobPeriod: 1
   _bobAmplitude: 0.25
+  _lifetime: 5
   _collectParticles: {fileID: 0}
   _collectSFX: {fileID: 0}
   _reductionPercent: 100
