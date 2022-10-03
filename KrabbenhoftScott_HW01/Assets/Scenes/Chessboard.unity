@@ -2084,8 +2084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee0bd0fc88c54832a73300deeb4fb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SFXVolume: 0.75
-  SFX:
+  _ricochetSFXVolume: 0.75
+  _ricochetSFX:
   - {fileID: 8300000, guid: f18d987db9d834b2c809900a24c69603, type: 3}
   - {fileID: 8300000, guid: d80ca4e17d0a94e328ba08d31c9bba60, type: 3}
   - {fileID: 8300000, guid: 560aa6d1b0104441b86659040cf0338b, type: 3}
@@ -2096,6 +2096,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3be8c2186e8874a0d9989cdca2bfec87, type: 3}
   - {fileID: 8300000, guid: 73254f07a51064030a77e4672e036f5f, type: 3}
   - {fileID: 8300000, guid: 3f74cd70770ce4fdbad9c5b8b0ac224b, type: 3}
+  _explodeSFXVolume: 1
+  _explodeSFX:
+  - {fileID: 8300000, guid: 661916a94d9c14073884f0a388bbad55, type: 3}
+  - {fileID: 8300000, guid: 942b1e32abcb141a89ef0b10e0b13d18, type: 3}
+  - {fileID: 8300000, guid: b3975eb3f5f6046b181b6a39c5e9485f, type: 3}
+  - {fileID: 8300000, guid: c888c385255f547cdabd3828e153c32f, type: 3}
+  - {fileID: 8300000, guid: c10b43e6f952e40e78996d01e4deb3d9, type: 3}
+  _slamSFXVolume: 0.1
+  _slamSFX:
+  - {fileID: 8300000, guid: 62166aca53d044489a873d3db733646e, type: 3}
+  - {fileID: 8300000, guid: c801c617e8e9348a29d361dbb73cd215, type: 3}
+  - {fileID: 8300000, guid: 4120c09f8805c47c7be4515065c69b92, type: 3}
 --- !u!4 &1568522731
 Transform:
   m_ObjectHideFlags: 0
@@ -2657,6 +2669,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 8154761039049127311}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: _laserDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: _quakeDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4608175589685633770, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
+      propertyPath: _contactDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4608175589685633771, guid: f235a748e378f4d11ad0fa970e011964, type: 3}
       propertyPath: m_RootOrder
       value: 5

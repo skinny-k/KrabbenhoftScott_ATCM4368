@@ -22,25 +22,17 @@ public class ExplosiveBullet : Projectile
         Destroy(gameObject);
     }
 
-    protected override void Feedback(Collision collision)
-    {
-        if (_impactParticles != null)
-        {
-            Instantiate(_impactParticles, transform.position, transform.rotation);
-        }
-        if (_explosionSFX != null)
-        {
-            AudioHelper.PlayClip2D(_explosionSFX, _SFXVolume);
-        }
-    }
-
     void Explode()
     {
         Object[] enemies = Object.FindObjectsOfType(typeof(Enemy));
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.GetComponent<Health>().DecreaseHealth((int)(_explosionDamage * _damageModifier));
+            Debug.Log(Vector3.Distance(transform.position, enemy.transform.position));
+            if (Vector3.Distance(transform.position, enemy.transform.position) < _explosionRadius)
+            {
+                enemy.GetComponent<Health>().DecreaseHealth((int)(_explosionDamage * _damageModifier));
+            }
         }
     }
 }

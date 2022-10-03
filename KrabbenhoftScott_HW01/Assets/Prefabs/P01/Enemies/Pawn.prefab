@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 2.5
-  _contactDamage: 10
+  _contactDamage: 5
   _jumpParticles: {fileID: 5569045393413846111, guid: f8999534029b44636b484e8e2ba43e96, type: 3}
   _jumpPower: 120
   _pickupDropChance: 100

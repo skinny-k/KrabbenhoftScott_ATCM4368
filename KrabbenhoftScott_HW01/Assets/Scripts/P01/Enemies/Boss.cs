@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class Boss : Enemy
     [SerializeField] Material m_queen;
     [SerializeField] Material m_king;
 
+    public static event Action OnSlam;
+    
     protected Light _light;
     protected Rigidbody _rb;
     protected BossMoveIndicator _indicator;
@@ -55,7 +58,7 @@ public class Boss : Enemy
         _eye.SetColorNormal();
         _target = transform.position;
 
-        Random.InitState(System.DateTime.Now.Millisecond);
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
     }
 
     void Start()
@@ -88,7 +91,7 @@ public class Boss : Enemy
         {
             if (Vector3.Distance(transform.position, player.transform.position) <= 3)
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "KING";
                 }
@@ -99,7 +102,7 @@ public class Boss : Enemy
             }
             else
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "QUEEN";
                 }
@@ -114,7 +117,7 @@ public class Boss : Enemy
         {
             if (Vector3.Distance(transform.position, player.transform.position) <= 3)
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "KING";
                 }
@@ -125,7 +128,7 @@ public class Boss : Enemy
             }
             else
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "QUEEN";
                 }
@@ -149,7 +152,7 @@ public class Boss : Enemy
         }
         else
         {
-            switch (Random.Range(0, 4))
+            switch (UnityEngine.Random.Range(0, 4))
             {
                 case 0:
                     moveType = "BISHOP";
@@ -197,11 +200,11 @@ public class Boss : Enemy
         switch (moveType)
         {
             case "PAWN":
-                int column = (Random.Range(-4, 4) * 2) + 1;
+                int column = (UnityEngine.Random.Range(-4, 4) * 2) + 1;
                 int row;
                 do
                 {
-                    row = (Random.Range(-4, 4) * 2) + 1;
+                    row = (UnityEngine.Random.Range(-4, 4) * 2) + 1;
                 } while (Mathf.Abs(row - transform.position.z) < 1 || (Mathf.Abs(row - player.transform.position.z) < 1));
                 StartCoroutine(SpawnPawn(new Vector3(column, 1, row)));
                 break;
@@ -489,6 +492,7 @@ public class Boss : Enemy
             _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
             Instantiate(_jumpParticles, transform.position, Quaternion.identity);
             StartCoroutine(Camera.main.GetComponent<CameraController>().Shake());
+            OnSlam?.Invoke();
 
             if (_needsPawn)
             {

@@ -11,11 +11,10 @@ public abstract class Projectile : MonoBehaviour
     [Header("Base Settings")]
     [SerializeField] protected float _travelSpeed = .25f;
     [SerializeField] protected ParticleSystem _impactParticles;
-    [SerializeField] protected float _SFXVolume = 0.75f;
 
     protected Rigidbody _rb;
 
-    public static event Action<Transform> OnImpact;
+    public static event Action<Projectile> OnImpact;
 
     protected virtual void Awake()
     {
@@ -45,7 +44,7 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        OnImpact?.Invoke(transform);
+        OnImpact?.Invoke(this);
     }
 
     protected virtual void Feedback(Collision collision)
@@ -54,7 +53,7 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        OnImpact?.Invoke(transform);
+        OnImpact?.Invoke(this);
     }
 }
 

@@ -15,12 +15,10 @@
 
 ### TO-DO ###
 # Find Additional SFX
-#     - Explosion for explosive bullets
-#     - SFX for all boss attacks
-#         - Queen Lasers
-#         - Quake
-#         - Impact?
-#     - Powerups
 #     - Background Music?
+
+# Add UI for boosts
+
+# Implement Impact SFX when hit game wall
 
 # If everything else done, implement title screen and/or pause functionality

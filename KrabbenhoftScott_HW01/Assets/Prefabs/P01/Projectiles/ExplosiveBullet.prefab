@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _travelSpeed: 0.25
   _impactParticles: {fileID: 257417324015750092, guid: 8227f9c4e603f42fc80b6e848c8585d4, type: 3}
-  _SFXVolume: 0.75
   _impactDamage: 10
   _explosionDamage: 20
   _explosionRadius: 2
+  _explosionSFX: {fileID: 0}

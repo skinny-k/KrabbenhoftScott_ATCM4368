@@ -5,21 +5,44 @@ using UnityEngine;
 
 public class SFXContainer : MonoBehaviour
 {
-    [SerializeField] float _SFXVolume = 0.75f;
-    [SerializeField] AudioClip[] SFX;
+    [Header("Ricochet SFX")]
+    [SerializeField] float _ricochetSFXVolume = 0.75f;
+    [SerializeField] AudioClip[] _ricochetSFX;
+    [Header("Explode SFX")]
+    [SerializeField] float _explodeSFXVolume = 0.75f;
+    [SerializeField] AudioClip[] _explodeSFX;
+    [Header("Slam SFX")]
+    [SerializeField] float _slamSFXVolume = 0.75f;
+    [SerializeField] AudioClip[] _slamSFX;
 
     void OnEnable()
     {
         Projectile.OnImpact += PlayImpactSFX;
+        Boss.OnSlam += PlaySlamSFX;
     }
 
-    void PlayImpactSFX(Transform impactLocation)
+    void PlayImpactSFX(Projectile projectile)
     {
-        AudioHelper.PlayClip3D(SFX[UnityEngine.Random.Range(0, SFX.Length)], _SFXVolume, impactLocation.position);
+        Vector3 impactPosition = projectile.transform.position;
+
+        if (projectile is ExplosiveBullet)
+        {
+            AudioHelper.PlayClip3D(_explodeSFX[UnityEngine.Random.Range(0, _explodeSFX.Length)], _ricochetSFXVolume, impactPosition);
+        }
+        else
+        {
+            AudioHelper.PlayClip3D(_ricochetSFX[UnityEngine.Random.Range(0, _ricochetSFX.Length)], _explodeSFXVolume, impactPosition);
+        }
+    }
+
+    void PlaySlamSFX()
+    {
+        AudioHelper.PlayClip2D(_slamSFX[UnityEngine.Random.Range(0, _slamSFX.Length)], _slamSFXVolume);
     }
 
     void OnDisable()
     {
         Projectile.OnImpact -= PlayImpactSFX;
+        Boss.OnSlam -= PlaySlamSFX;
     }
 }
