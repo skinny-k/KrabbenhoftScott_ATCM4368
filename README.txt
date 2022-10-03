@@ -16,16 +16,11 @@
 ### TO-DO ###
 # Find Additional SFX
 #     - Explosion for explosive bullets
-#     - SFX for boss all boss attacks
+#     - SFX for all boss attacks
 #         - Queen Lasers
 #         - Quake
 #         - Impact?
 #     - Powerups
 #     - Background Music?
 
-# Create feedback for powerups
-#     - DamageBoost (particles, SFX)
-#     - DefenseBoost (particles, SFX)
-#     - SpeedBoost (particles, SFX)
-#     - Invincibility (SFX, material? or particles)
-#     - Ammo pickups (SFX, particles?)
+# If everything else done, implement title screen and/or pause functionality

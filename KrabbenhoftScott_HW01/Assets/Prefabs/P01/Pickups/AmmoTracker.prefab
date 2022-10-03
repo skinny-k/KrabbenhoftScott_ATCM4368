@@ -4945,7 +4945,7 @@ MonoBehaviour:
   _bobPeriod: 1
   _bobAmplitude: 0.25
   _lifetime: 5
-  _collectParticles: {fileID: 0}
+  _collectParticles: {fileID: 439881043729578222, guid: 5bb5969372c954279907bf1dd4cef8c6, type: 3}
   _collectSFX: {fileID: 0}
   _ammoPrefab: {fileID: -719225002857989701, guid: 36f8c15160bee422ca08751f26aacf5e, type: 3}
   _ammoCount: 20
