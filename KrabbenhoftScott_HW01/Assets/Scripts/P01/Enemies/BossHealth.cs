@@ -25,6 +25,22 @@ public class BossHealth : Health
             }
         }
     }
+
+    public override void DecreaseHealth(Transform source, int damage)
+    {
+        if (!isDying)
+        {
+            base.DecreaseHealth(source, damage);
+        }
+    }
+
+    public override void DecreaseHealth(int damage)
+    {
+        if (!isDying)
+        {
+            base.DecreaseHealth(damage);
+        }
+    }
     
     protected override void Kill()
     {
@@ -35,6 +51,7 @@ public class BossHealth : Health
         if (_dieSFX != null)
         {
             AudioHelper.PlayClip3D(_dieSFX, 1f, transform.position);
+
         }
 
         GetComponent<Rigidbody>().freezeRotation = true;

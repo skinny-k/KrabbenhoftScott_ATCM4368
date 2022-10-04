@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,17 +11,14 @@ public abstract class Projectile : MonoBehaviour
     [Header("Base Settings")]
     [SerializeField] protected float _travelSpeed = .25f;
     [SerializeField] protected ParticleSystem _impactParticles;
-    [SerializeField] float _SFXVolume = 0.75f;
 
     protected Rigidbody _rb;
-    protected AudioClip _ricochetSFX;
 
-    void Awake()
+    public static event Action<Projectile> OnImpact;
+
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-
-        SFXContainer ricochetSFXContainer = GameObject.Find("RicochetSFXContainer").GetComponent<SFXContainer>();
-        _ricochetSFX = ricochetSFXContainer.SFX[Random.Range(0, ricochetSFXContainer.Length)];
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -46,10 +44,7 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        if (_ricochetSFX != null)
-        {
-            AudioHelper.PlayClip3D(_ricochetSFX, _SFXVolume, transform.position);
-        }
+        OnImpact?.Invoke(this);
     }
 
     protected virtual void Feedback(Collision collision)
@@ -58,10 +53,7 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(_impactParticles, transform.position, transform.rotation);
         }
-        if (_ricochetSFX != null)
-        {
-            AudioHelper.PlayClip3D(_ricochetSFX, _SFXVolume, transform.position);
-        }
+        OnImpact?.Invoke(this);
     }
 }
 

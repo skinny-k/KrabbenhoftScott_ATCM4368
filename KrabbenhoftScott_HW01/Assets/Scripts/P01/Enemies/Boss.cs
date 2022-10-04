@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class Boss : Enemy
     [SerializeField] Material m_queen;
     [SerializeField] Material m_king;
 
+    public static event Action OnSlam;
+    
     protected Light _light;
     protected Rigidbody _rb;
     protected BossMoveIndicator _indicator;
@@ -48,14 +51,14 @@ public class Boss : Enemy
     {
         _rb = GetComponent<Rigidbody>();
         _indicator = transform.GetChild(0).GetComponent<BossMoveIndicator>();
-        _light = transform.GetChild(1).GetComponent<Light>();
+        _light = transform.GetChild(0).GetChild(0).GetComponent<Light>();
         _health = GetComponent<BossHealth>();
         _playerHealth = player.GetComponent<Health>();
-        _eye = transform.GetChild(2).GetComponent<Eye>();
+        _eye = transform.GetChild(1).GetComponent<Eye>();
         _eye.SetColorNormal();
         _target = transform.position;
 
-        Random.InitState(System.DateTime.Now.Millisecond);
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
     }
 
     void Start()
@@ -79,6 +82,35 @@ public class Boss : Enemy
         }
     }
 
+    protected override void Move()
+    {
+        if (!_health.isDying)
+        {
+            if (_needsTarget)
+            {
+                FindTarget();
+            }
+            if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
+            {
+                Vector3 moveOffset = _target - transform.position;
+                _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
+                if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
+                {
+                    _rb.MovePosition(_target);
+                    if (moveType == "ROOK" || moveType == "BISHOP")
+                    {
+                        OnSlam?.Invoke();
+                    }
+                    moveType = null;
+                }
+            }
+            if (moveType == "KNIGHT")
+            {
+                _rb.AddForce(Physics.gravity * -0.75f);
+            }
+        }
+    }
+
     void ChooseMove()
     {
         // check cardinals
@@ -88,7 +120,7 @@ public class Boss : Enemy
         {
             if (Vector3.Distance(transform.position, player.transform.position) <= 3)
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "KING";
                 }
@@ -99,7 +131,7 @@ public class Boss : Enemy
             }
             else
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "QUEEN";
                 }
@@ -114,7 +146,7 @@ public class Boss : Enemy
         {
             if (Vector3.Distance(transform.position, player.transform.position) <= 3)
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "KING";
                 }
@@ -125,7 +157,7 @@ public class Boss : Enemy
             }
             else
             {
-                if(Random.Range(0, 2) == 0)
+                if(UnityEngine.Random.Range(0, 2) == 0)
                 {
                     moveType = "QUEEN";
                 }
@@ -149,7 +181,7 @@ public class Boss : Enemy
         }
         else
         {
-            switch (Random.Range(0, 4))
+            switch (UnityEngine.Random.Range(0, 4))
             {
                 case 0:
                     moveType = "BISHOP";
@@ -167,41 +199,16 @@ public class Boss : Enemy
         }
     }
 
-    protected override void Move()
-    {
-        if (!_health.isDying)
-        {
-            if (_needsTarget)
-            {
-                FindTarget();
-            }
-            if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
-            {
-                Vector3 moveOffset = _target - transform.position;
-                _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
-                if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
-                {
-                    _rb.MovePosition(_target);
-                    moveType = null;
-                }
-            }
-            if (moveType == "KNIGHT")
-            {
-                _rb.AddForce(Physics.gravity * -0.75f);
-            }
-        }
-    }
-
     protected void FindTarget()
     {
         switch (moveType)
         {
             case "PAWN":
-                int column = (Random.Range(-4, 4) * 2) + 1;
+                int column = (UnityEngine.Random.Range(-4, 4) * 2) + 1;
                 int row;
                 do
                 {
-                    row = (Random.Range(-4, 4) * 2) + 1;
+                    row = (UnityEngine.Random.Range(-4, 4) * 2) + 1;
                 } while (Mathf.Abs(row - transform.position.z) < 1 || (Mathf.Abs(row - player.transform.position.z) < 1));
                 StartCoroutine(SpawnPawn(new Vector3(column, 1, row)));
                 break;
@@ -489,6 +496,7 @@ public class Boss : Enemy
             _rb.MovePosition(new Vector3(Mathf.Round(transform.position.x), 1.125f, Mathf.Round(transform.position.z)));
             Instantiate(_jumpParticles, transform.position, Quaternion.identity);
             StartCoroutine(Camera.main.GetComponent<CameraController>().Shake());
+            OnSlam?.Invoke();
 
             if (_needsPawn)
             {

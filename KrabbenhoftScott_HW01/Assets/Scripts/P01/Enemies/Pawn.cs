@@ -2,18 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pawn : Enemy
+public class Pawn : Enemy, IDropsPickups
 {
     [SerializeField] ParticleSystem _jumpParticles;
     [SerializeField] float _jumpPower = 10f;
+    [SerializeField] int _pickupDropChance = 60;
     public Player player;
 
     Rigidbody _rb;
+    Health _health;
     float _moveModifier = 1f;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _health = GetComponent<Health>();
+    }
+
+    void OnEnable()
+    {
+        _health.OnDie += SpawnPickups;
     }
     
     protected override void Move()
@@ -37,5 +45,19 @@ public class Pawn : Enemy
         {
             base.OnCollisionEnter(collision);
         }
+    }
+
+    public void SpawnPickups()
+    {
+        if (Random.Range(0, 101) <= _pickupDropChance)
+        {
+            PickupSpawner.SpawnPickup(transform.position);
+        }
+    }
+
+    void OnDisable()
+    {
+        _health.OnDie -= SpawnPickups;
+        Destroy(gameObject);
     }
 }

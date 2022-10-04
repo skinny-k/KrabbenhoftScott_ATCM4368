@@ -55,7 +55,7 @@ public class Quake : MonoBehaviour
         bool playerInAreaY = transform.position.y > player.transform.position.y;
         if (playerInAreaXZ && playerInAreaY && !_hitPlayer)
         {
-            player.GetComponent<Health>().DecreaseHealth(_damage);
+            player.DecreaseHealth(_damage);
             _hitPlayer = true;
         }
 

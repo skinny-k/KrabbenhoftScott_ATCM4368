@@ -7,23 +7,13 @@
 # Shoot - LMB
 # Space - Jump
 # Esc   - Quit
+# M     - Mute Music
 
 ### Innovations ###
 # Added a simple Pawn enemy to harass players while boss is stationary
 # Used particle trigger system to cull particles used by the lasers
+# Special limited ammunition may be picked up from enemy drops
+# Used singleton pattern for MusicPlayer
 
 ### TO-DO ###
-# Implement multiple projectile types
-#     - Tracker Bullet
-#     - Triple Bullet
-#     - Explosive Bullet?
-#     - Mine Bullet?
-#     - Ricochet Shot?
-
-# Implement pickups to drop from Pawn enemies
-#     - Health Pickup
-#     - Bullet Types?
-#     - Invincibility
-#     - Defense Boost
-#     - Damage Boost
-#     - Speed Boost
+# If everything else done, implement title screen and/or pause functionality
