@@ -82,6 +82,35 @@ public class Boss : Enemy
         }
     }
 
+    protected override void Move()
+    {
+        if (!_health.isDying)
+        {
+            if (_needsTarget)
+            {
+                FindTarget();
+            }
+            if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
+            {
+                Vector3 moveOffset = _target - transform.position;
+                _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
+                if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
+                {
+                    _rb.MovePosition(_target);
+                    if (moveType == "ROOK" || moveType == "BISHOP")
+                    {
+                        OnSlam?.Invoke();
+                    }
+                    moveType = null;
+                }
+            }
+            if (moveType == "KNIGHT")
+            {
+                _rb.AddForce(Physics.gravity * -0.75f);
+            }
+        }
+    }
+
     void ChooseMove()
     {
         // check cardinals
@@ -166,31 +195,6 @@ public class Boss : Enemy
                 case 3:
                     moveType = "PAWN";
                     break;
-            }
-        }
-    }
-
-    protected override void Move()
-    {
-        if (!_health.isDying)
-        {
-            if (_needsTarget)
-            {
-                FindTarget();
-            }
-            if (_inMove && (moveType == "ROOK" || moveType == "KNIGHT" || moveType == "BISHOP"))
-            {
-                Vector3 moveOffset = _target - transform.position;
-                _rb.MovePosition(transform.position + (moveOffset * Time.deltaTime * _moveSpeed / Vector3.Distance(transform.position, _target)));
-                if (Mathf.Round(transform.position.x) == _target.x && Mathf.Round(transform.position.z) == _target.z)
-                {
-                    _rb.MovePosition(_target);
-                    moveType = null;
-                }
-            }
-            if (moveType == "KNIGHT")
-            {
-                _rb.AddForce(Physics.gravity * -0.75f);
             }
         }
     }

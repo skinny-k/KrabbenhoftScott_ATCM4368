@@ -260,6 +260,7 @@ MonoBehaviour:
   _bobAmplitude: 0.25
   _lifetime: 5
   _collectParticles: {fileID: 439881043729578222, guid: 6bbdfc4c7d51548669512bc473a6a632, type: 3}
-  _collectSFX: {fileID: 0}
+  _collectSFX: {fileID: 8300000, guid: 045d1a3e7a9ce4e4a8494056643185ad, type: 3}
+  _collectSFXVolume: 0.15
   _reductionPercent: 100
   _duration: 5

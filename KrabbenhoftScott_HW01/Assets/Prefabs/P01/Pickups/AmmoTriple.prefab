@@ -84,7 +84,8 @@ MonoBehaviour:
   _bobAmplitude: 0.25
   _lifetime: 5
   _collectParticles: {fileID: 439881043729578222, guid: 5bb5969372c954279907bf1dd4cef8c6, type: 3}
-  _collectSFX: {fileID: 0}
+  _collectSFX: {fileID: 8300000, guid: 3e81ff3f0ff714583bcb627320d43209, type: 3}
+  _collectSFXVolume: 1
   _ammoPrefab: {fileID: 7871128504230438761, guid: 6f412015abf6e4c728520e45bfbba409, type: 3}
   _ammoCount: 10
 --- !u!1 &6449780320917113695

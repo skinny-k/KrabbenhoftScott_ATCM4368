@@ -9,10 +9,18 @@ public class Player : MonoBehaviour
     PlayerMovement _movement;
     PlayerGun _gun;
 
-    public event Action<int> OnPlayerHeal;
-    public event Action OnDamageBoost;
-    public event Action OnSpeedBoost;
-    public event Action OnDefenseBoost;
+    public Health MyHealth
+    {
+        get => _health;
+    }
+    public PlayerMovement MyMovement
+    {
+        get => _movement;
+    }
+    public PlayerGun MyGun
+    {
+        get => _gun;
+    }
 
     void Awake()
     {

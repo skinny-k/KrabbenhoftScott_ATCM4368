@@ -14,11 +14,4 @@
 # Special limited ammunition may be picked up from enemy drops
 
 ### TO-DO ###
-# Find Additional SFX
-#     - Background Music?
-
-# Add UI for boosts
-
-# Implement Impact SFX when hit game wall
-
 # If everything else done, implement title screen and/or pause functionality

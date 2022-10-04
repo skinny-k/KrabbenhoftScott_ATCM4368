@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1480017703988047752}
   - component: {fileID: 439881043729578222}
   - component: {fileID: 5146338736742430988}
+  - component: {fileID: 9213748259690416623}
+  - component: {fileID: -24899057665940929}
   m_Layer: 0
   m_Name: CollectDefense
   m_TagString: Untagged
@@ -4986,3 +4988,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9213748259690416623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280629999754188437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d337707ef1d5e40cd98e174468e45e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-24899057665940929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280629999754188437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

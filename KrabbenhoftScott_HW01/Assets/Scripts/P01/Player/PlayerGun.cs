@@ -8,6 +8,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] Projectile _standardProjectile;
     [SerializeField] protected ParticleSystem _fireParticles;
     [SerializeField] protected AudioClip _fireSFX;
+    [SerializeField] protected float _fireSFXVolume = 0.05f;
     [SerializeField] float fireRate = 0.25f;
 
     public event Action<Projectile, int> OnAmmoChange;
@@ -36,7 +37,7 @@ public class PlayerGun : MonoBehaviour
             }
             if (_fireSFX != null)
             {
-                AudioHelper.PlayClip2D(_fireSFX, 0.1f);
+                AudioHelper.PlayClip2D(_fireSFX, _fireSFXVolume);
             }
             Fire();
             cooldown = 0;

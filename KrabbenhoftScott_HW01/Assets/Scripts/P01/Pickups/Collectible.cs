@@ -14,6 +14,7 @@ public abstract class Collectible : MonoBehaviour
     [Header("Feedback Settings")]
     [SerializeField] ParticleSystem _collectParticles;
     [SerializeField] AudioClip _collectSFX;
+    [SerializeField] float _collectSFXVolume = 0.75f;
 
     Rigidbody _rb;
 
@@ -55,11 +56,11 @@ public abstract class Collectible : MonoBehaviour
     {
         if (_collectParticles != null)
         {
-            Instantiate(_collectParticles, location, Quaternion.identity);
+            ParticleSystem spawnedParticles = Instantiate(_collectParticles, location, Quaternion.identity);
         }
         if (_collectSFX != null)
         {
-            AudioHelper.PlayClip2D(_collectSFX, 1f);
+            AudioHelper.PlayClip2D(_collectSFX, _collectSFXVolume);
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AmmoSwapPickup : Collectible
 {
+    [Header("Ammo Pickup Settings")]
     [SerializeField] Projectile _ammoPrefab;
     [SerializeField] int _ammoCount;
 

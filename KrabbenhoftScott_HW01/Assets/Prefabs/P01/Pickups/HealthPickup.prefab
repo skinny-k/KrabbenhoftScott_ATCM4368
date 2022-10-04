@@ -232,6 +232,7 @@ MonoBehaviour:
   _lifetime: 5
   _collectParticles: {fileID: 439881043729578222, guid: 1435425e3816b44e7802e732359f18da, type: 3}
   _collectSFX: {fileID: 8300000, guid: 29959fc9c41e44bd59750850520a5e45, type: 3}
+  _collectSFXVolume: 0.25
   _healAmount: 5
 --- !u!54 &6317263029671602229
 Rigidbody:
