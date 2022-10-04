@@ -14,7 +14,6 @@ public class PickupSpawner : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

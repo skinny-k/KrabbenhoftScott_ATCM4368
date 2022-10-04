@@ -24,9 +24,9 @@ public class MusicPlayer : MonoBehaviour
 
     void Update()
     {
-        if (PlayerPrefs.HasKey("MusicVolume"))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            audioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+            audioSource.mute = !audioSource.mute;
         }
     }
 
