@@ -5,15 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance = null;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            Quit();
         }
         else if (Input.GetKey(KeyCode.Backspace))
         {
-            SceneManager.LoadScene("Chessboard");
+            LoadScene("Chessboard");
         }
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

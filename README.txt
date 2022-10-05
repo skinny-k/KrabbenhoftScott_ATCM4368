@@ -16,4 +16,4 @@
 # Used singleton pattern for MusicPlayer
 
 ### TO-DO ###
-# If everything else done, implement title screen and/or pause functionality
+# If everything else done, implement pause functionality
