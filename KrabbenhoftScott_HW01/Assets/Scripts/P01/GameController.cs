@@ -11,13 +11,16 @@ public class GameController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Quit();
-        }
-        else if (Input.GetKey(KeyCode.Backspace))
-        {
-            LoadScene("Chessboard");
+            if (Time.timeScale == 1)
+            {
+                Pause();
+            }
+            else if (Time.timeScale == 0)
+            {
+                Unpause();
+            }
         }
     }
 
