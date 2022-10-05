@@ -16,4 +16,4 @@
 # Used singleton pattern for MusicPlayer
 
 ### TO-DO ###
-# If everything else done, implement pause functionality
+# Can pause menu work with static methods?

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance = null;
-    
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public static event Action OnPause;
+    public static event Action OnUnpause;
     
     void Update()
     {
@@ -32,13 +21,26 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName)
+    public static void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Unpause();
     }
 
-    public void Quit()
+    public static void Quit()
     {
         Application.Quit();
+    }
+
+    public static void Pause()
+    {
+        OnPause?.Invoke();
+        Time.timeScale = 0;
+    }
+
+    public static void Unpause()
+    {
+        OnUnpause?.Invoke();
+        Time.timeScale = 1;
     }
 }

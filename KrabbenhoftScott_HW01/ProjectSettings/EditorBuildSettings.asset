@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuScreen.unity
+    guid: a400db76cbc2e477580a8194b49dd412
+  - enabled: 1
     path: Assets/Scenes/Chessboard.unity
     guid: 54e06aea9faf14aea9969339c585dd3e
   m_configObjects: {}
