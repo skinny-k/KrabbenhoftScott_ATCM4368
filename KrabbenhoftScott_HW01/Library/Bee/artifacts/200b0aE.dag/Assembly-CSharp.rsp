@@ -388,6 +388,7 @@
 "Assets/Scripts/P01/UI/AmmoDisplay.cs"
 "Assets/Scripts/P01/UI/HealthBar.cs"
 "Assets/Scripts/P01/UI/PlayerCanvasController.cs"
+"Assets/Scripts/P01/UI/UIController.cs"
 -langversion:9.0
 
 /deterministic

@@ -6,14 +6,15 @@
 # Aim   - Mouse
 # Shoot - LMB
 # Space - Jump
-# Esc   - Quit
-# M     - Mute Music
+# Esc   - Toggle Pause
+# M     - Toggle Music
 
 ### Innovations ###
 # Added a simple Pawn enemy to harass players while boss is stationary
 # Used particle trigger system to cull particles used by the lasers
 # Special limited ammunition may be picked up from enemy drops
 # Used singleton pattern for MusicPlayer
+# Implemented game pause functionality
 
 ### TO-DO ###
-# If everything else done, implement title screen and/or pause functionality
+# Can pause menu work with a singleton GameController?
