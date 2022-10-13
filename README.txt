@@ -6,8 +6,8 @@
 # Aim   - Mouse
 # Shoot - LMB
 # Space - Jump
-# Esc   - Quit
-# M     - Mute Music
+# Esc   - Toggle Pause
+# M     - Toggle Music
 
 ### Innovations ###
 # Added a simple Pawn enemy to harass players while boss is stationary
